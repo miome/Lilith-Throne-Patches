@@ -1,0 +1,3531 @@
+diff -urN liliths-throne-base/src/com/lilithsthrone/controller/xmlParsing/Element.java liliths-throne-public/src/com/lilithsthrone/controller/xmlParsing/Element.java
+--- liliths-throne-base/src/com/lilithsthrone/controller/xmlParsing/Element.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/controller/xmlParsing/Element.java	2025-03-13 21:02:54.913106394 -0400
+@@ -6,6 +6,7 @@
+ import java.util.Optional;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.DOMException;
+ import org.w3c.dom.Document;
+ 
+@@ -49,7 +50,7 @@
+ 	public static Element getDocumentRootElement(File xmlFile) throws XMLLoadException{
+ 		try{
+ 			String fileDirectory = xmlFile.getAbsolutePath();
+-			Document parsedDocument = Main.getDocBuilder().parse(xmlFile);
++			Document parsedDocument = DocBuilders.parseDoc(xmlFile);
+ 			parsedDocument.getDocumentElement().normalize();
+ 			return new Element(parsedDocument.getDocumentElement(), fileDirectory, parsedDocument);
+ 			
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAntennaType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAntennaType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAntennaType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAntennaType.java	2025-03-13 21:02:54.952106292 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -88,7 +89,7 @@
+ 	public AbstractAntennaType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -219,4 +220,4 @@
+ 	public String getTransformationDescription(GameCharacter owner) {
+ 		return UtilText.parse(owner, antennaTransformationDescription);
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAnusType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAnusType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAnusType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAnusType.java	2025-03-13 21:02:54.953106290 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -80,7 +81,7 @@
+ 	public AbstractAnusType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -196,4 +197,4 @@
+ 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
+ 		return defaultRacialOrificeModifiers;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractArmType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractArmType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractArmType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractArmType.java	2025-03-13 21:02:54.953106290 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -129,7 +130,7 @@
+ 	public AbstractArmType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -364,4 +365,4 @@
+ 	public List<BodyPartTag> getTags() {
+ 		return armTags;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAssType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAssType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAssType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractAssType.java	2025-03-13 21:02:54.954106287 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -85,7 +86,7 @@
+ 	public AbstractAssType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -216,4 +217,4 @@
+ 	public String getTransformationDescription(GameCharacter owner) {
+ 		return UtilText.parse(owner, assTransformationDescription);
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractBreastType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractBreastType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractBreastType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractBreastType.java	2025-03-13 21:02:54.954106287 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -126,7 +127,7 @@
+ 	public AbstractBreastType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -314,4 +315,4 @@
+ 		return UtilText.parse(owner, breastsCrotchBodyDescription);
+ 	}
+ 	
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEarType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEarType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEarType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEarType.java	2025-03-13 21:02:54.954106287 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -88,7 +89,7 @@
+ 	public AbstractEarType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -213,4 +214,4 @@
+ 	public List<BodyPartTag> getTags() {
+ 		return tags;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEyeType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEyeType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEyeType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractEyeType.java	2025-03-13 21:02:54.955106284 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -103,7 +104,7 @@
+ 	public AbstractEyeType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -239,4 +240,4 @@
+ 	public List<BodyPartTag> getTags() {
+ 		return tags;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFaceType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFaceType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFaceType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFaceType.java	2025-03-13 21:02:54.956106282 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -148,7 +149,7 @@
+ 	public AbstractFaceType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -339,4 +340,4 @@
+ 	public List<BodyPartTag> getTags() {
+ 		return tags;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFluidType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFluidType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFluidType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractFluidType.java	2025-03-13 21:02:54.956106282 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -88,7 +89,7 @@
+ 	public AbstractFluidType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -251,4 +252,4 @@
+ 	public float getValueModifier() {
+ 		return 1f;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHairType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHairType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHairType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHairType.java	2025-03-13 21:02:54.956106282 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -105,7 +106,7 @@
+ 	public AbstractHairType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -267,4 +268,4 @@
+ 	public List<BodyPartTag> getTags() {
+ 		return tags;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHornType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHornType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHornType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractHornType.java	2025-03-13 21:02:54.956106282 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -93,7 +94,7 @@
+ 	public AbstractHornType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -249,4 +250,4 @@
+ 	public String getTransformationDescription(GameCharacter owner) {
+ 		return UtilText.parse(owner, hornTransformationDescription);
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractLegType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractLegType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractLegType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractLegType.java	2025-03-13 21:02:54.958106277 -0400
+@@ -6,6 +6,7 @@
+ import java.util.List;
+ import java.util.Map;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -165,7 +166,7 @@
+ 	public AbstractLegType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -1142,4 +1143,4 @@
+ 		}
+ 		return null;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractMouthType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractMouthType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractMouthType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractMouthType.java	2025-03-13 21:02:54.958106277 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -138,7 +139,7 @@
+ 	public AbstractMouthType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -325,4 +326,4 @@
+ 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
+ 		return defaultRacialOrificeModifiers;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractNippleType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractNippleType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractNippleType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractNippleType.java	2025-03-13 21:02:54.959106274 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -66,7 +67,7 @@
+ 	public AbstractNippleType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -223,4 +224,4 @@
+ 	public List<OrificeModifier> getDefaultRacialOrificeModifiers() {
+ 		return defaultRacialOrificeModifiers;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractPenisType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractPenisType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractPenisType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractPenisType.java	2025-03-13 21:02:54.959106274 -0400
+@@ -7,6 +7,7 @@
+ import java.util.Map;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -136,7 +137,7 @@
+ 	public AbstractPenisType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -398,4 +399,4 @@
+ 		}
+ 		return "";
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTailType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTailType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTailType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTailType.java	2025-03-13 21:02:54.959106274 -0400
+@@ -4,6 +4,7 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -134,7 +135,7 @@
+ 	public AbstractTailType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -965,4 +966,4 @@
+ 	public boolean hasSpinneret() {
+ 		return spinneret;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTentacleType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTentacleType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTentacleType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTentacleType.java	2025-03-13 21:02:54.960106271 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -128,7 +129,7 @@
+ 	public AbstractTentacleType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -501,4 +502,4 @@
+ 	public TFModifier getTFModifier() {
+ 		return this==TentacleType.NONE ? TFModifier.REMOVAL : getTFTypeModifier(TentacleType.getTentacleTypes(race));
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTesticleType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTesticleType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTesticleType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTesticleType.java	2025-03-13 21:02:54.960106271 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -79,7 +80,7 @@
+ 	public AbstractTesticleType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -189,4 +190,4 @@
+ 		return race;
+ 	}
+ 	
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTongueType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTongueType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTongueType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTongueType.java	2025-03-13 21:02:54.960106271 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -84,7 +85,7 @@
+ 	public AbstractTongueType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -193,4 +194,4 @@
+ 		return defaultRacialTongueModifiers;
+ 	}
+ 	
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTorsoType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTorsoType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTorsoType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractTorsoType.java	2025-03-13 21:02:54.961106269 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -76,7 +77,7 @@
+ 	public AbstractTorsoType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -188,4 +189,4 @@
+ 	public List<BodyPartTag> getTags() {
+ 		return torsoTags;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractVaginaType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractVaginaType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractVaginaType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractVaginaType.java	2025-03-13 21:02:54.961106269 -0400
+@@ -7,6 +7,7 @@
+ import java.util.Map;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -144,7 +145,7 @@
+ 	public AbstractVaginaType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -342,4 +343,4 @@
+ 	public String applyAdditionalTransformationEffects(GameCharacter owner, boolean applicationAfterChangeApplied) {
+ 		return "";
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractWingType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractWingType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractWingType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/abstractTypes/AbstractWingType.java	2025-03-13 21:02:54.961106269 -0400
+@@ -5,6 +5,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -100,7 +101,7 @@
+ 	public AbstractWingType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -240,4 +241,4 @@
+ 	public String getTransformationDescription(GameCharacter owner) {
+ 		return UtilText.parse(owner, wingTransformationDescription);
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/body/coverings/AbstractBodyCoveringType.java liliths-throne-public/src/com/lilithsthrone/game/character/body/coverings/AbstractBodyCoveringType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/body/coverings/AbstractBodyCoveringType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/body/coverings/AbstractBodyCoveringType.java	2025-03-13 21:02:54.962106266 -0400
+@@ -11,6 +11,7 @@
+ import java.util.Set;
+ import java.util.function.Function;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -224,7 +225,7 @@
+ 	public AbstractBodyCoveringType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -485,4 +486,4 @@
+ 	public List<CoveringModifier> getAllModifiers() {
+ 		return allModifiers;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/CharacterUtils.java liliths-throne-public/src/com/lilithsthrone/game/character/CharacterUtils.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/CharacterUtils.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/CharacterUtils.java	2025-03-13 21:02:54.924106365 -0400
+@@ -14,12 +14,14 @@
+ import java.util.Map.Entry;
+ import java.util.stream.Collectors;
+ 
++import javax.xml.parsers.DocumentBuilder;
+ import javax.xml.transform.OutputKeys;
+ import javax.xml.transform.Transformer;
+ import javax.xml.transform.TransformerException;
+ import javax.xml.transform.dom.DOMSource;
+ import javax.xml.transform.stream.StreamResult;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ 
+@@ -154,8 +156,8 @@
+ 		try {
+ //			long timeStart = System.nanoTime();
+ //			System.out.println(timeStart);
+-
+-			Document doc = Main.getDocBuilder().newDocument();
++			DocumentBuilder db = DocBuilders.getNextDocBuilder();
++			Document doc = db.newDocument();
+ 			
+ 			Element properties = doc.createElement("playerCharacter");
+ 			doc.appendChild(properties);
+@@ -204,7 +206,8 @@
+ 			StreamResult result = new StreamResult(saveLocation);
+ 			
+ 			transformer.transform(source, result);
+-		
++
++			db.reset();
+ 		} catch (TransformerException e) {
+ 			e.printStackTrace();
+ 		}
+@@ -231,7 +234,7 @@
+ 		
+ 		if (xmlFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(xmlFile);
++				Document doc = DocBuilders.parseDoc(xmlFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -3363,4 +3366,4 @@
+ 		
+ 		return clothingGenerated;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/effects/AbstractStatusEffect.java liliths-throne-public/src/com/lilithsthrone/game/character/effects/AbstractStatusEffect.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/effects/AbstractStatusEffect.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/effects/AbstractStatusEffect.java	2025-03-13 21:02:54.963106264 -0400
+@@ -16,6 +16,7 @@
+ 
+ import javax.script.ScriptException;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -184,7 +185,7 @@
+ 	public AbstractStatusEffect(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -1375,4 +1376,4 @@
+ 		
+ 		return SVGImageSB.toString();
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/effects/Perk.java liliths-throne-public/src/com/lilithsthrone/game/character/effects/Perk.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/effects/Perk.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/effects/Perk.java	2025-03-13 21:02:54.967106253 -0400
+@@ -6682,7 +6682,7 @@
+ 		hiddenPerks.sort((p1, p2) -> p1.getRenderingPriority()-p2.getRenderingPriority());
+ 	}
+ 	
+-	private static void generateSubspeciesPerks() {
++	public static void generateSubspeciesPerks() {
+ 		List<AbstractAttribute> resistancesAdded = new ArrayList<>();
+ 		for(AbstractSubspecies sub : Subspecies.getAllSubspecies()) {
+ 			if(!resistancesAdded.contains(sub.getDamageMultiplier())) {
+@@ -6763,4 +6763,4 @@
+ 		}
+ 		return subspeciesKnowledgePerks;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/npc/NPCRegistry.java liliths-throne-public/src/com/lilithsthrone/game/character/npc/NPCRegistry.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/npc/NPCRegistry.java	1969-12-31 19:00:00.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/npc/NPCRegistry.java	2025-03-13 21:02:54.979106222 -0400
+@@ -0,0 +1,610 @@
++package com.lilithsthrone.game.character.npc;
++
++import com.lilithsthrone.game.character.attributes.AffectionLevel;
++import com.lilithsthrone.game.character.attributes.ObedienceLevel;
++import com.lilithsthrone.game.character.npc.dominion.*;
++import com.lilithsthrone.game.character.npc.fields.*;
++import com.lilithsthrone.game.character.npc.misc.*;
++import com.lilithsthrone.game.character.npc.submission.*;
++import com.lilithsthrone.game.character.quests.Quest;
++import com.lilithsthrone.game.character.quests.QuestLine;
++import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.NPCThread;
++import com.lilithsthrone.world.WorldType;
++import com.lilithsthrone.world.places.PlaceType;
++
++import java.util.Set;
++
++import static com.lilithsthrone.game.Game.loadingVersion;
++
++/**
++ * @since 0.4.10.7
++ * @version 0.4.10.7
++ * @author Innoxia, KeldonSlayer (DrZed)
++ */
++public class NPCRegistry {
++    /*It would be nicer if all addNPC() getNPC() and NPCMap were to also be moved here,
++        but I wanted to keep as few things moved as possible.
++
++      Feel free to re-sort and/or add/remove threads as you wish,
++            The upper limit I've tested is 24
++            The lower limit I've tested is  8
++          Threads beyond 15 were miniscule changes,
++          and below 12 depends on if you sort them by load time
++
++          Most NPCs load in 10-100ms, but a few take >400ms, and a couple take over 900ms
++    */
++
++    private static final boolean TIME_TESTING = false, ENABLE_NPC_THREADING = true;
++    public static void initUniqueNPCs() {
++        if (ENABLE_NPC_THREADING) {
++            initUniqueNPCsThreaded();
++            return;
++        }
++        long timeStarted = System.currentTimeMillis();
++
++        initMiscNPCs();
++        initDominionNPCs();
++        initEnforcerNPCs();
++        initShoppingNPCs();
++        initHarpyNestNPCs();
++        initAssortedNPCs();
++        initSpecialLocationNPCs();
++        initFieldsNPCs();
++        initElisNPCs();
++        initFarmersMarketNPCs();
++        initWallsEndNPCs();
++        initSubmissionNPCs();
++
++        initRelations(Main.game.getNPCMap().keySet());
++
++        if (TIME_TESTING)
++            System.out.println("initUniqueNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initUniqueNPCsThreaded() {
++        long waits = 0, timeStarted = System.currentTimeMillis();
++        new NPCThread("initMiscNPCs").start();
++        new NPCThread("initDominionNPCs").start();
++        new NPCThread("initEnforcerNPCs").start();
++        new NPCThread("initShoppingNPCs").start();
++        new NPCThread("initHarpyNestNPCs").start();
++        new NPCThread("initAssortedNPCs").start();
++        new NPCThread("initSpecialLocationNPCs").start();
++        new NPCThread("initFieldsNPCs").start();
++        new NPCThread("initElisNPCs").start();
++        new NPCThread("initFarmersMarketNPCs").start();
++        new NPCThread("initWallsEndNPCs").start();
++        new NPCThread("initSubmissionNPCs").start();
++
++        while (!NPCThread.npcsInitialized()) {
++            waits++;
++        }
++
++        initRelations(Main.game.getNPCMap().keySet());
++        if (TIME_TESTING)
++            System.out.println("Threading took [ " + waits + " ] wait cycles! or " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initMiscNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Misc.:
++        addIfMissingSafely(GenericMaleNPC.class);
++        addIfMissingSafely(GenericFemaleNPC.class);
++        addIfMissingSafely(GenericAndrogynousNPC.class);
++        addIfMissingSafely(PrologueMale.class);
++        addIfMissingSafely(PrologueFemale.class);
++        addIfMissingSafely(GenericTrader.class);
++        addIfMissingSafely(TestNPC.class);
++
++        // Contributors:
++        addIfMissingSafely(Lumi.class);
++        addIfMissingSafely(Pazu.class);
++        addIfMissingSafely(Ashley.class);
++        addIfMissingSafely(Callie.class);
++
++        if (TIME_TESTING)
++            System.out.println("initMiscNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    /*
++     *          Dominion
++     */
++    public static void initDominionNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Story:
++        addIfMissingSafely(Rose.class);
++        addIfMissingSafely(Lilaya.class);
++        addIfMissingSafely(Arthur.class);
++
++        // Angel's kiss:
++        addIfMissingSafely(Angel.class);
++        addIfMissingSafely(Bunny.class);
++        addIfMissingSafely(Loppy.class);
++
++        // Nightclub:
++        addIfMissingSafely(Jules.class);
++        addIfMissingSafely(Kruger.class);
++        addIfMissingSafely(Kalahari.class);
++
++
++        if (TIME_TESTING)
++            System.out.println("initDominionNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initEnforcerNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Enforcers:
++        addIfMissingSafely(Brax.class);
++        addIfMissingSafely(CandiReceptionist.class);
++        addIfMissingSafely(Wes.class);
++        addIfMissingSafely(Elle.class);
++
++        // Enforcer station:
++        addIfMissingSafely(Sterope.class);
++        addIfMissingSafely(Hammer.class);
++        addIfMissingSafely(Ghost.class);
++        addIfMissingSafely(Angelixx.class);
++        addIfMissingSafely(Sleip.class);
++        addIfMissingSafely(Nir.class);
++
++        if (TIME_TESTING)
++            System.out.println("initEnforcerNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initHarpyNestNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Harpy nests:
++        addIfMissingSafely(Scarlett.class);
++        addIfMissingSafely(Helena.class);
++        addIfMissingSafely(HarpyBimbo.class);
++        addIfMissingSafely(HarpyBimboCompanion.class);
++        addIfMissingSafely(HarpyDominant.class);
++        addIfMissingSafely(HarpyDominantCompanion.class);
++        addIfMissingSafely(HarpyNympho.class);
++        addIfMissingSafely(HarpyNymphoCompanion.class);
++
++        if (TIME_TESTING)
++            System.out.println("initHarpyNestNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initAssortedNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // City hall:
++        addIfMissingSafely(Vanessa.class);
++
++        // Dominion Express:
++        addIfMissingSafely(Natalya.class);
++
++        // Slaver alley:
++        addIfMissingSafely(Finch.class);
++        addIfMissingSafely(Sean.class);
++
++
++        // Rental mommy;
++        addIfMissingSafely(RentalMommy.class);
++
++        // 'Daddy':
++        addIfMissingSafely(Daddy.class);
++
++
++
++        // Lovienne's Luxuries:
++        addIfMissingSafely(Saellatrix.class);
++        addIfMissingSafely(Fiammetta.class);
++
++        // Headless horseman:
++        addIfMissingSafely(HeadlessHorseman.class);
++
++        // Elder lilin:
++        addIfMissingSafely(Lunette.class);
++        addIfMissingSafely(Lovienne.class);
++
++        if (TIME_TESTING)
++            System.out.println("initAssortedNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++
++    public static void initSubmissionNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Submission:
++
++        // Story
++        addIfMissingSafely(Lyssieth.class);
++        addIfMissingSafely(Elizabeth.class);
++        addIfMissingSafely(Takahashi.class);
++        addIfMissingSafely(DarkSiren.class);
++
++
++        // Gambling den:
++        addIfMissingSafely(Roxy.class);
++        addIfMissingSafely(Axel.class);
++        addIfMissingSafely(Epona.class);
++
++        // Rat Warrens:
++        addIfMissingSafely(Vengar.class);
++        addIfMissingSafely(Shadow.class);
++        addIfMissingSafely(Silence.class);
++        addIfMissingSafely(Murk.class);
++
++        // Hazmat Rat:
++        addIfMissingSafely(HazmatRat.class);
++
++        if (TIME_TESTING)
++            System.out.println("initSubmissionNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initSpecialLocationNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Sawlty Towers (Arthur/Felicia's apartment building):
++        addIfMissingSafely(Felicia.class);
++
++        // Zaranix's home:
++        addIfMissingSafely(Zaranix.class);
++        addIfMissingSafely(Amber.class);
++        addIfMissingSafely(ZaranixMaidKatherine.class);
++        addIfMissingSafely(ZaranixMaidKelly.class);
++
++        // Fortress
++        addIfMissingSafely(Claire.class);
++        addIfMissingSafely(FortressAlphaLeader.class);
++        addIfMissingSafely(FortressFemalesLeader.class);
++        addIfMissingSafely(FortressMalesLeader.class);
++
++        // Slime queen:
++        addIfMissingSafely(SlimeQueen.class);
++        addIfMissingSafely(SlimeGuardIce.class);
++        addIfMissingSafely(SlimeGuardFire.class);
++        addIfMissingSafely(SlimeRoyalGuard.class);
++
++        if (TIME_TESTING)
++            System.out.println("initSpecialLocationNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initFarmersMarketNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Farmer's Market:
++        addIfMissingSafely(Fae.class);
++        addIfMissingSafely(Silvia.class);
++        addIfMissingSafely(Kazik.class);
++        addIfMissingSafely(Yui.class);
++        addIfMissingSafely(Nizhoni.class);
++        addIfMissingSafely(Moreno.class);
++        addIfMissingSafely(Heather.class);
++        addIfMissingSafely(Ziva.class);
++        addIfMissingSafely(Eisek.class);
++
++        if (TIME_TESTING)
++            System.out.println("initFarmersMarketNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initWallsEndNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Wall's End:
++        addIfMissingSafely(Monica.class);
++        addIfMissingSafely(Ceridwen.class);
++        addIfMissingSafely(Imsu.class);
++        addIfMissingSafely(Hale.class);
++        addIfMissingSafely(Penelope.class);
++        addIfMissingSafely(Belle.class);
++        addIfMissingSafely(Daphne.class);
++        addIfMissingSafely(Farah.class);
++
++        if (TIME_TESTING)
++            System.out.println("initWallsEndNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initShoppingNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Shopping Promenade:
++        addIfMissingSafely(Ralph.class);
++        addIfMissingSafely(Nyan.class);
++        addIfMissingSafely(NyanMum.class);
++        addIfMissingSafely(Vicky.class);
++        addIfMissingSafely(Pix.class);
++        addIfMissingSafely(Hannah.class);
++        addIfMissingSafely(Kate.class);
++        addIfMissingSafely(SupplierLeader.class);
++        addIfMissingSafely(SupplierPartner.class);
++        addIfMissingSafely(Kay.class);
++
++        if (TIME_TESTING)
++            System.out.println("initShoppingNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    /*
++     *          Elis
++     */
++    public static void initElisNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // The Red Dragon:
++        addIfMissingSafely(Flash.class);
++        addIfMissingSafely(Jess.class);
++
++        // Astrapi/Vronti/Kheiron:
++        addIfMissingSafely(Astrapi.class);
++        addIfMissingSafely(Vronti.class);
++        addIfMissingSafely(Kheiron.class);
++
++        // Minotallys/Arion
++        addIfMissingSafely(Arion.class);
++        addIfMissingSafely(Minotallys.class);
++
++        if (TIME_TESTING)
++            System.out.println("initElisNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++    public static void initFieldsNPCs() {
++        long timeStarted = System.currentTimeMillis();
++        // Evelyx's Dairy:
++        addIfMissingSafely(Evelyx.class);
++        addIfMissingSafely(Dale.class);
++
++        // Themiscyra:
++        addIfMissingSafely(Lunexis.class);
++        addIfMissingSafely(Ursa.class);
++        addIfMissingSafely(Aurokaris.class);
++
++        // The Crossed Blades:
++        addIfMissingSafely(Oglix.class);
++        addIfMissingSafely(Golix.class);
++        addIfMissingSafely(Wynter.class);
++
++        if (TIME_TESTING)
++            System.out.println("initFieldsNPCs took: " + (System.currentTimeMillis() - timeStarted) + " ms");
++    }
++
++
++    public static void initRelations(Set<String> addedNpcs) {
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Lilaya.class))) {
++            Main.game.getNpc(Lilaya.class).setAffection(Main.game.getPlayer(), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
++            Main.game.getNpc(Lilaya.class).setAffection(Main.game.getNpc(Rose.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Lilaya.class).addSlave(Main.game.getNpc(Rose.class));
++
++            Main.game.getNpc(Lilaya.class).setAffection(Main.game.getNpc(Lyssieth.class), -60);
++            Main.game.getNpc(Lilaya.class).setAffection(Main.game.getNpc(DarkSiren.class), 15);
++            Main.game.getNpc(Lilaya.class).setMother(Main.game.getNpc(Lyssieth.class));
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Rose.class))) {
++            Main.game.getNpc(Rose.class).setAffection(Main.game.getPlayer(), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
++            Main.game.getNpc(Rose.class).setAffection(Main.game.getNpc(Lilaya.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Rose.class).setObedience(ObedienceLevel.POSITIVE_FIVE_SUBSERVIENT.getMedianValue());
++            Main.game.getNpc(Rose.class).setAffection(Main.game.getNpc(Lyssieth.class), -40);
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(DarkSiren.class))) {
++            Main.game.getNpc(DarkSiren.class).setAffection(Main.game.getNpc(Lyssieth.class), -25);
++            Main.game.getNpc(DarkSiren.class).setAffection(Main.game.getNpc(Lilaya.class), 35);
++            Main.game.getNpc(DarkSiren.class).setMother(Main.game.getNpc(Lyssieth.class));
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Elizabeth.class))) {
++            Main.game.getNpc(Elizabeth.class).setMother(Main.game.getNpc(Lyssieth.class));
++            Main.game.getNpc(Elizabeth.class).setAffection(Main.game.getNpc(Lyssieth.class), 100);
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Lyssieth.class))) {
++            Main.game.getNpc(Lyssieth.class).setAffection(Main.game.getNpc(Lilaya.class), 100);
++            Main.game.getNpc(Lyssieth.class).setAffection(Main.game.getNpc(DarkSiren.class), 50);
++            Main.game.getNpc(Lyssieth.class).setAffection(Main.game.getNpc(Elizabeth.class), 75);
++            Main.game.getNpc(Lyssieth.class).setAffection(Main.game.getNpc(Rose.class), -80);
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Brax.class))) {
++            Main.game.getNpc(Brax.class).setAffection(Main.game.getNpc(CandiReceptionist.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(CandiReceptionist.class))) {
++            Main.game.getNpc(CandiReceptionist.class).setAffection(Main.game.getNpc(Brax.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Wes.class))) {
++            Main.game.getNpc(Wes.class).setAffection(Main.game.getNpc(Elle.class), AffectionLevel.NEGATIVE_THREE_STRONG_DISLIKE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Elle.class))) {
++            Main.game.getNpc(Elle.class).setAffection(Main.game.getNpc(Wes.class), AffectionLevel.NEGATIVE_ONE_ANNOYED.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Pix.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Hannah.class))) {
++            Main.game.getNpc(Pix.class).setAffection(Main.game.getNpc(Hannah.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(Hannah.class).setAffection(Main.game.getNpc(Pix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Nyan.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(NyanMum.class))) {
++            Main.game.getNpc(Nyan.class).setAffection(Main.game.getNpc(NyanMum.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(NyanMum.class).setAffection(Main.game.getNpc(Nyan.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++
++            Main.game.getNpc(Nyan.class).setAffection(Main.game.getNpc(Ashley.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++            Main.game.getNpc(Ashley.class).setAffection(Main.game.getNpc(Nyan.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(SupplierLeader.class))) {
++            Main.game.getNpc(SupplierLeader.class).setAffection(Main.game.getNpc(SupplierPartner.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++            Main.game.getNpc(SupplierPartner.class).setAffection(Main.game.getNpc(SupplierLeader.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Kay.class))) {
++            Main.game.getNpc(Nyan.class).setAffection(Main.game.getNpc(Kay.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
++            Main.game.getNpc(Kay.class).setAffection(Main.game.getNpc(Nyan.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Scarlett.class))) {
++            Main.game.getNpc(Scarlett.class).setAffection(Main.game.getPlayer(), AffectionLevel.NEGATIVE_TWO_DISLIKE.getMedianValue());
++            Main.game.getNpc(Scarlett.class).setAffection(Main.game.getNpc(Helena.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            if(Main.game.getPlayer().hasQuest(QuestLine.MAIN) && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_F_SCARLETTS_FATE)) {
++                Main.game.getNpc(Scarlett.class).setLocation(WorldType.HARPY_NEST, PlaceType.HARPY_NESTS_HELENAS_NEST);
++            }
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Helena.class))) {
++            Main.game.getNpc(Helena.class).setAffection(Main.game.getNpc(Scarlett.class), AffectionLevel.NEGATIVE_FOUR_HATE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(HarpyBimbo.class))) {
++            Main.game.getNpc(HarpyBimbo.class).setAffection(Main.game.getNpc(HarpyBimboCompanion.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(HarpyBimboCompanion.class))) {
++            Main.game.getNpc(HarpyBimboCompanion.class).setAffection(Main.game.getNpc(HarpyBimbo.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(HarpyDominant.class))) {
++            Main.game.getNpc(HarpyDominant.class).setAffection(Main.game.getNpc(HarpyDominantCompanion.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(HarpyDominantCompanion.class))) {
++            Main.game.getNpc(HarpyDominantCompanion.class).setAffection(Main.game.getNpc(HarpyDominant.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(HarpyNympho.class))) {
++            Main.game.getNpc(HarpyNympho.class).setAffection(Main.game.getNpc(HarpyNymphoCompanion.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(HarpyNymphoCompanion.class))) {
++            Main.game.getNpc(HarpyNymphoCompanion.class).setAffection(Main.game.getNpc(HarpyNympho.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Sean.class))) {
++            Main.game.getNpc(Brax.class).setPetName(Main.game.getNpc(Sean.class), Main.game.getNpc(Sean.class).getName(false));
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Daddy.class))) {
++            Main.game.getNpc(Rose.class).setAffection(Main.game.getNpc(Daddy.class), -50);
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Felicia.class))) {
++            Main.game.getNpc(Felicia.class).setAffection(Main.game.getNpc(Arthur.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Fiammetta.class))) {
++            Main.game.getNpc(Fiammetta.class).setAffection(Main.game.getNpc(Saellatrix.class), -100);
++            Main.game.getNpc(Saellatrix.class).setAffection(Main.game.getNpc(Fiammetta.class), -50);
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Zaranix.class))) {
++            Main.game.getNpc(Zaranix.class).setAffection(Main.game.getNpc(ZaranixMaidKatherine.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(Zaranix.class).setAffection(Main.game.getNpc(ZaranixMaidKelly.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(Zaranix.class).setAffection(Main.game.getNpc(Amber.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Amber.class))) {
++            Main.game.getNpc(Amber.class).setAffection(Main.game.getNpc(Zaranix.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Amber.class).setAffection(Main.game.getNpc(ZaranixMaidKelly.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(Amber.class).setAffection(Main.game.getNpc(ZaranixMaidKatherine.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(ZaranixMaidKatherine.class))) {
++            Main.game.getNpc(ZaranixMaidKatherine.class).setAffection(Main.game.getNpc(Zaranix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(ZaranixMaidKatherine.class).setAffection(Main.game.getNpc(ZaranixMaidKelly.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(ZaranixMaidKatherine.class).setAffection(Main.game.getNpc(Amber.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(ZaranixMaidKelly.class))) {
++            Main.game.getNpc(ZaranixMaidKelly.class).setAffection(Main.game.getNpc(Zaranix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(ZaranixMaidKelly.class).setAffection(Main.game.getNpc(ZaranixMaidKatherine.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(ZaranixMaidKelly.class).setAffection(Main.game.getNpc(Amber.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Vengar.class))) {
++            Main.game.getNpc(Vengar.class).setAffection(Main.game.getNpc(Shadow.class), 50);
++            Main.game.getNpc(Vengar.class).setAffection(Main.game.getNpc(Silence.class), 50);
++            Main.game.getNpc(Shadow.class).setAffection(Main.game.getNpc(Vengar.class), -10);
++            Main.game.getNpc(Shadow.class).setAffection(Main.game.getNpc(Silence.class), 80);
++            Main.game.getNpc(Silence.class).setAffection(Main.game.getNpc(Vengar.class), 20);
++            Main.game.getNpc(Silence.class).setAffection(Main.game.getNpc(Shadow.class), 100);
++        }
++        if(Main.isVersionOlderThan(loadingVersion, "0.3.5.6")) {
++            Main.game.getNpc(Roxy.class).setAffection(Main.game.getNpc(Vengar.class), -80);
++            Main.game.getNpc(Vengar.class).setAffection(Main.game.getNpc(Roxy.class), 50);
++        }
++        if(Main.isVersionOlderThan(loadingVersion, "0.3.5.9")) {
++            Main.game.getNpc(Silence.class).setAffection(Main.game.getNpc(Shadow.class), 100);
++            Main.game.getNpc(Silence.class).getAffectionMap().remove(Main.game.getNpc(Silence.class).getId());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Flash.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Jess.class))) {
++            Main.game.getNpc(Jess.class).setAffection(Main.game.getNpc(Flash.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Flash.class).setAffection(Main.game.getNpc(Jess.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Astrapi.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Vronti.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Kheiron.class))) {
++            Main.game.getNpc(Astrapi.class).setAffection(Main.game.getNpc(Vronti.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Astrapi.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++
++            Main.game.getNpc(Vronti.class).setAffection(Main.game.getNpc(Astrapi.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Vronti.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++
++            Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Astrapi.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Vronti.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++
++            Main.game.getNpc(Astrapi.class).setFather(Main.game.getNpc(Kheiron.class));
++            Main.game.getNpc(Vronti.class).setFather(Main.game.getNpc(Kheiron.class));
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Arion.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Minotallys.class))) {
++            Main.game.getNpc(Arion.class).setAffection(Main.game.getNpc(Minotallys.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
++            Main.game.getNpc(Minotallys.class).setAffection(Main.game.getNpc(Arion.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Fae.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Silvia.class))) {
++            Main.game.getNpc(Silvia.class).setAffection(Main.game.getNpc(Fae.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++            Main.game.getNpc(Fae.class).setAffection(Main.game.getNpc(Silvia.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Imsu.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Hale.class))) {
++            Main.game.getNpc(Imsu.class).setAffection(Main.game.getNpc(Hale.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++            Main.game.getNpc(Hale.class).setAffection(Main.game.getNpc(Imsu.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Penelope.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Pix.class)) || Main.isVersionOlderThan(loadingVersion, "0.4.2.7")) {
++            Main.game.getNpc(Penelope.class).setAffection(Main.game.getNpc(Pix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(Pix.class).setAffection(Main.game.getNpc(Penelope.class), AffectionLevel.NEGATIVE_ONE_ANNOYED.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Oglix.class))) {
++            Main.game.getNpc(Oglix.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++            Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Oglix.class), AffectionLevel.NEGATIVE_THREE_STRONG_DISLIKE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Golix.class))) {
++            ((Oglix)Main.game.getNpc(Oglix.class)).createElemental(); // inits the summoner ID
++            Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Golix.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
++            Main.game.getNpc(Golix.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Hammer.class))) {
++            Main.game.getNpc(Hammer.class).setAffection(Main.game.getNpc(Ghost.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++            Main.game.getNpc(Ghost.class).setAffection(Main.game.getNpc(Hammer.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Kalahari.class))) {
++            Main.game.getNpc(Kalahari.class).setFather(Main.game.getNpc(Kruger.class));
++            Main.game.getNpc(Kalahari.class).setAffection(Main.game.getNpc(Kruger.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Kruger.class))) {
++            Main.game.getNpc(Kruger.class).setAffection(Main.game.getNpc(Kalahari.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Evelyx.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Dale.class))) {
++            Main.game.getNpc(Evelyx.class).setAffection(Main.game.getNpc(Dale.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++            Main.game.getNpc(Dale.class).setAffection(Main.game.getNpc(Evelyx.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Angelixx.class)) || addedNpcs.contains(Main.game.getUniqueNPCId(Saellatrix.class))) {
++            Main.game.getNpc(Angelixx.class).setAffection(Main.game.getNpc(Sleip.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++            Main.game.getNpc(Angelixx.class).setAffection(Main.game.getNpc(Nir.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++
++            Main.game.getNpc(Saellatrix.class).setAffection(Main.game.getNpc(Angelixx.class), AffectionLevel.NEGATIVE_THREE_STRONG_DISLIKE.getMedianValue());
++            Main.game.getNpc(Angelixx.class).setAffection(Main.game.getNpc(Saellatrix.class), AffectionLevel.NEGATIVE_TWO_DISLIKE.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Saellatrix.class)) || Main.isVersionOlderThan(loadingVersion, "0.4.9.12")) {
++            Main.game.getNpc(Saellatrix.class).setAffection(Main.game.getNpc(Lilaya.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
++            Main.game.getNpc(Lilaya.class).setAffection(Main.game.getNpc(Saellatrix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Sleip.class))) {
++            Main.game.getNpc(Sleip.class).setMother(Main.game.getNpc(Angelixx.class));
++            Main.game.getNpc(Sleip.class).setAffection(Main.game.getNpc(Angelixx.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
++            Main.game.getNpc(Sleip.class).setAffection(Main.game.getNpc(Nir.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Nir.class))) {
++            Main.game.getNpc(Nir.class).setMother(Main.game.getNpc(Angelixx.class));
++            Main.game.getNpc(Nir.class).setAffection(Main.game.getNpc(Angelixx.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
++            Main.game.getNpc(Nir.class).setAffection(Main.game.getNpc(Sleip.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
++        }
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Lunette.class))) {
++            Main.game.getNpc(Lunexis.class).setMother(Main.game.getNpc(Lunette.class));
++            Main.game.getNpc(Lunexis.class).setAffection(Main.game.getNpc(Lunette.class), 100);
++        }
++
++        if(addedNpcs.contains(Main.game.getUniqueNPCId(Lovienne.class))) {
++            Main.game.getNpc(Angelixx.class).setMother(Main.game.getNpc(Lovienne.class));
++            Main.game.getNpc(Angelixx.class).setAffection(Main.game.getNpc(Lovienne.class), 100);
++            Main.game.getNpc(Saellatrix.class).setMother(Main.game.getNpc(Lovienne.class));
++            Main.game.getNpc(Saellatrix.class).setAffection(Main.game.getNpc(Lovienne.class), 100);
++        }
++    }
++
++
++    public static void addIfMissing(Class<? extends NPC> npc) throws Exception {
++        if (!Main.game.getNPCMap().containsKey(Main.game.getUniqueNPCId(npc))) {
++            Main.game.addNPC(npc.getConstructor().newInstance(), false);
++        }
++    }
++
++    public static void addIfMissingSafely(Class<? extends NPC> npc) {
++        try {
++            addIfMissing(npc);
++        } catch (Exception p) {
++            System.err.println(p.getMessage());
++        }
++    }
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/persona/Name.java liliths-throne-public/src/com/lilithsthrone/game/character/persona/Name.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/persona/Name.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/persona/Name.java	2025-03-13 21:02:54.980106219 -0400
+@@ -7,6 +7,7 @@
+ import java.util.Map;
+ import java.util.Map.Entry;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -704,7 +705,7 @@
+ 	private static Map<String, List<NameTriplet>> importNames(File XMLFile, String author, boolean mod, String raceID) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -906,4 +907,4 @@
+ 			return Util.randomItemFrom(prostitute);
+ 		}
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/race/AbstractRace.java liliths-throne-public/src/com/lilithsthrone/game/character/race/AbstractRace.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/race/AbstractRace.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/race/AbstractRace.java	2025-03-13 21:02:54.982106214 -0400
+@@ -4,6 +4,7 @@
+ import java.util.HashMap;
+ import java.util.Map;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -158,7 +159,7 @@
+ 	public AbstractRace(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -454,4 +455,4 @@
+ 	public Map<AbstractFetish, Map<String, Integer>> getRacialFetishModifiers() {
+ 		return racialFetishModifiers;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/race/AbstractRacialBody.java liliths-throne-public/src/com/lilithsthrone/game/character/race/AbstractRacialBody.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/race/AbstractRacialBody.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/race/AbstractRacialBody.java	2025-03-13 21:02:54.983106211 -0400
+@@ -8,6 +8,7 @@
+ import java.util.Map.Entry;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -457,7 +458,7 @@
+ 	public AbstractRacialBody(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -1204,4 +1205,4 @@
+ 	public GenitalArrangement getGenitalArrangement() {
+ 		return genitalArrangement;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/character/race/AbstractSubspecies.java liliths-throne-public/src/com/lilithsthrone/game/character/race/AbstractSubspecies.java
+--- liliths-throne-base/src/com/lilithsthrone/game/character/race/AbstractSubspecies.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/character/race/AbstractSubspecies.java	2025-03-13 21:02:54.985106206 -0400
+@@ -14,6 +14,7 @@
+ import java.util.Map;
+ import java.util.Map.Entry;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -389,7 +390,7 @@
+ 	public AbstractSubspecies(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -1399,7 +1400,7 @@
+ 		}
+ 		if(bookFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(bookFile);
++				Document doc = DocBuilders.parseDoc(bookFile);
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+ 				Element coreElement = Element.getDocumentRootElement(bookFile); // Loads the document and returns the root element
+@@ -2026,4 +2027,4 @@
+ 			}
+ 		}
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/combat/moves/AbstractCombatMove.java liliths-throne-public/src/com/lilithsthrone/game/combat/moves/AbstractCombatMove.java
+--- liliths-throne-base/src/com/lilithsthrone/game/combat/moves/AbstractCombatMove.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/combat/moves/AbstractCombatMove.java	2025-03-13 21:02:54.986106204 -0400
+@@ -11,6 +11,7 @@
+ import java.util.Map;
+ import java.util.Objects;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -207,7 +208,7 @@
+ 	public AbstractCombatMove(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -915,4 +916,4 @@
+ 	public int getEquipWeighting() {
+ 		return equipWeighting;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/dialogue/AbstractDialogueFlagValue.java liliths-throne-public/src/com/lilithsthrone/game/dialogue/AbstractDialogueFlagValue.java
+--- liliths-throne-base/src/com/lilithsthrone/game/dialogue/AbstractDialogueFlagValue.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/dialogue/AbstractDialogueFlagValue.java	2025-03-13 21:02:54.986106204 -0400
+@@ -4,6 +4,7 @@
+ import java.util.ArrayList;
+ import java.util.List;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -32,7 +33,7 @@
+ 	public static List<AbstractDialogueFlagValue> loadFlagsFromFile(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -74,4 +75,4 @@
+ 	public void setId(String id) {
+ 		this.id = id;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/dialogue/DialogueNode.java liliths-throne-public/src/com/lilithsthrone/game/dialogue/DialogueNode.java
+--- liliths-throne-base/src/com/lilithsthrone/game/dialogue/DialogueNode.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/dialogue/DialogueNode.java	2025-03-13 21:02:54.987106201 -0400
+@@ -7,6 +7,7 @@
+ import java.util.Map;
+ import java.util.Map.Entry;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -63,7 +64,7 @@
+ 			List<DialogueNode> loadedNodes = new ArrayList<>();
+ 			
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -860,4 +861,4 @@
+ 			Main.game.getDialogueFlags().setFlag(DialogueFlagValue.coveringChangeListenersRequired, false);
+ 		}
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/dialogue/encounters/AbstractEncounter.java liliths-throne-public/src/com/lilithsthrone/game/dialogue/encounters/AbstractEncounter.java
+--- liliths-throne-base/src/com/lilithsthrone/game/dialogue/encounters/AbstractEncounter.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/dialogue/encounters/AbstractEncounter.java	2025-03-13 21:02:54.988106198 -0400
+@@ -10,6 +10,7 @@
+ 
+ import com.lilithsthrone.game.character.npc.misc.NPCOffspring;
+ import com.lilithsthrone.game.character.npc.misc.OffspringSeed;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -99,7 +100,7 @@
+ 	public AbstractEncounter(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -614,4 +615,4 @@
+ 		return placeTypeIds;
+ 	}
+ 
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/BodyChanging.java liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/BodyChanging.java
+--- liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/BodyChanging.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/BodyChanging.java	2025-03-13 21:02:54.991106190 -0400
+@@ -11,12 +11,14 @@
+ import java.util.Map.Entry;
+ import java.util.Set;
+ 
++import javax.xml.parsers.DocumentBuilder;
+ import javax.xml.transform.OutputKeys;
+ import javax.xml.transform.Transformer;
+ import javax.xml.transform.TransformerException;
+ import javax.xml.transform.dom.DOMSource;
+ import javax.xml.transform.stream.StreamResult;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ 
+@@ -2312,7 +2314,8 @@
+ 
+ 		try {
+ 			// Starting stuff:
+-			Document doc = Main.getDocBuilder().newDocument();
++			DocumentBuilder db = DocBuilders.getNextDocBuilder();
++			Document doc = db.newDocument();
+ 			
+ 			Element coreElement = doc.createElement("body");
+ 			doc.appendChild(coreElement);
+@@ -2337,7 +2340,8 @@
+ 			StreamResult result = new StreamResult(saveLocation);
+ 			
+ 			transformer.transform(source, result);
+-			
++
++			db.reset();
+ 		} catch (TransformerException tfe) {
+ 			tfe.printStackTrace();
+ 		}
+@@ -2352,7 +2356,7 @@
+ 
+ 			if (file.exists()) {
+ 				try {
+-					Document doc = Main.getDocBuilder().parse(file);
++					Document doc = DocBuilders.parseDoc(file);
+ 					
+ 					// Cast magic:
+ 					doc.getDocumentElement().normalize();
+@@ -2607,4 +2611,4 @@
+ 		}
+ 		
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/CosmeticsDialogue.java liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/CosmeticsDialogue.java
+--- liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/CosmeticsDialogue.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/CosmeticsDialogue.java	2025-03-13 21:02:54.993106185 -0400
+@@ -10,12 +10,14 @@
+ import java.util.TreeMap;
+ import java.util.Map.Entry;
+ 
++import javax.xml.parsers.DocumentBuilder;
+ import javax.xml.transform.OutputKeys;
+ import javax.xml.transform.Transformer;
+ import javax.xml.transform.TransformerException;
+ import javax.xml.transform.dom.DOMSource;
+ import javax.xml.transform.stream.StreamResult;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ 
+@@ -743,7 +745,8 @@
+ 
+ 		try {
+ 			// Starting stuff:
+-			Document doc = Main.getDocBuilder().newDocument();
++			DocumentBuilder db = DocBuilders.getNextDocBuilder();
++			Document doc = db.newDocument();
+ 			
+ 			Element tattooCoreElement = doc.createElement("tattooSave");
+ 			
+@@ -775,7 +778,8 @@
+ 			StreamResult result = new StreamResult(saveLocation);
+ 			
+ 			transformer.transform(source, result);
+-			
++
++			db.reset();
+ 		} catch (TransformerException tfe) {
+ 			tfe.printStackTrace();
+ 		}
+@@ -792,7 +796,7 @@
+ 
+ 			if (file.exists()) {
+ 				try {
+-					Document doc = Main.getDocBuilder().parse(file);
++					Document doc = DocBuilders.parseDoc(file);
+ 					
+ 					// Cast magic:
+ 					doc.getDocumentElement().normalize();
+@@ -835,4 +839,4 @@
+ 		}
+ 	}
+ 	
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/EnchantmentDialogue.java liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/EnchantmentDialogue.java
+--- liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/EnchantmentDialogue.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/EnchantmentDialogue.java	2025-03-13 21:02:54.994106183 -0400
+@@ -10,12 +10,14 @@
+ import java.util.Map.Entry;
+ import java.util.TreeMap;
+ 
++import javax.xml.parsers.DocumentBuilder;
+ import javax.xml.transform.OutputKeys;
+ import javax.xml.transform.Transformer;
+ import javax.xml.transform.TransformerException;
+ import javax.xml.transform.dom.DOMSource;
+ import javax.xml.transform.stream.StreamResult;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ 
+@@ -971,7 +973,8 @@
+ 
+ 		try {
+ 			// Starting stuff:
+-			Document doc = Main.getDocBuilder().newDocument();
++			DocumentBuilder db = DocBuilders.getNextDocBuilder();
++			Document doc = db.newDocument();
+ 			
+ 			Element enchantment = doc.createElement("enchantment");
+ 			doc.appendChild(enchantment);
+@@ -1026,7 +1029,8 @@
+ 			StreamResult result = new StreamResult(saveLocation);
+ 			
+ 			transformer.transform(source, result);
+-			
++
++			db.reset();
+ 		} catch (TransformerException tfe) {
+ 			tfe.printStackTrace();
+ 		}
+@@ -1043,7 +1047,7 @@
+ 
+ 			if (file.exists()) {
+ 				try {
+-					Document doc = Main.getDocBuilder().parse(file);
++					Document doc = DocBuilders.parseDoc(file);
+ 					
+ 					// Cast magic:
+ 					doc.getDocumentElement().normalize();
+@@ -1289,4 +1293,4 @@
+ 	public static GameCharacter getTattooBearer() {
+ 		return tattooBearer;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/UtilText.java liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/UtilText.java
+--- liliths-throne-base/src/com/lilithsthrone/game/dialogue/utils/UtilText.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/dialogue/utils/UtilText.java	2025-03-13 22:06:30.003570819 -0400
+@@ -26,6 +26,7 @@
+ import javax.script.ScriptEngine;
+ import javax.script.ScriptException;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ 
+@@ -259,7 +260,7 @@
+ 	private static boolean parseAddPronoun;
+ 
+ 	private static NashornScriptEngineFactory factory = new NashornScriptEngineFactory();
+-	private static ScriptEngine engine;
++	public static ScriptEngine engine;
+ 	
+ 	private static List<String> specialParsingStrings = new ArrayList<>();
+ 	private static List<GameCharacter> parsingCharactersForSpeech = new ArrayList<>();
+@@ -895,7 +896,7 @@
+ 		
+ 		if(file.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(file);
++				Document doc = DocBuilders.parseDoc(file);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -942,7 +943,7 @@
+ 		
+ 		if (file.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(file);
++				Document doc = DocBuilders.parseDoc(file);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -11009,4 +11010,4 @@
+ 		}
+ 		return script.eval();
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/Game.java liliths-throne-public/src/com/lilithsthrone/game/Game.java
+--- liliths-throne-base/src/com/lilithsthrone/game/Game.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/Game.java	2025-03-13 21:02:54.920106376 -0400
+@@ -34,12 +34,16 @@
+ import java.util.stream.Collectors;
+ import java.util.stream.IntStream;
+ 
++import javax.xml.parsers.DocumentBuilder;
+ import javax.xml.transform.OutputKeys;
+ import javax.xml.transform.Transformer;
+ import javax.xml.transform.TransformerException;
+ import javax.xml.transform.dom.DOMSource;
+ import javax.xml.transform.stream.StreamResult;
+ 
++import com.lilithsthrone.game.character.npc.NPCRegistry;
++import com.lilithsthrone.threading.DocBuilders;
++import com.lilithsthrone.threading.NPCThread;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ import org.w3c.dom.NodeList;
+@@ -315,6 +319,8 @@
+ import com.lilithsthrone.world.places.PlaceType;
+ import com.lilithsthrone.world.places.PlaceUpgrade;
+ 
++import static com.lilithsthrone.game.character.npc.NPCRegistry.initUniqueNPCs;
++
+ /**
+  * @since 0.1.0
+  * @version 0.3.7.3
+@@ -472,7 +478,8 @@
+ 			}
+ 			// Starting stuff:
+ 
+-			Document doc = Main.getDocBuilder().newDocument();
++			DocumentBuilder db = DocBuilders.getNextDocBuilder();
++			Document doc = db.newDocument();
+ 
+ 			// Writing game stuff to export:
+ 			
+@@ -548,6 +555,7 @@
+ 			if(timeLog) {
+ 				System.out.println("Difference: "+(System.nanoTime()-timeStart)/1000000000f);
+ 			}
++			db.reset();
+ 		} catch (TransformerException tfe) {
+ 			tfe.printStackTrace();
+ 		}
+@@ -571,7 +579,7 @@
+ 		
+ 		if (file.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(file);
++				Document doc = DocBuilders.parseDoc(file);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -618,7 +626,7 @@
+ 
+ 		if (file.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(file);
++				Document doc = DocBuilders.parseDoc(file);
+ 
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -656,7 +664,7 @@
+ 		
+ 		if (file.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(file);
++				Document doc = DocBuilders.parseDoc(file);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -703,7 +711,7 @@
+ 		
+ 		if (file.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(file);
++				Document doc = DocBuilders.parseDoc(file);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -775,8 +783,8 @@
+ 			System.out.println(timeStart);
+ 		}
+ 		// Starting stuff:
+-
+-		Document doc = Main.getDocBuilder().newDocument();
++		DocumentBuilder db = DocBuilders.getNextDocBuilder();
++		Document doc = db.newDocument();
+ 
+ 		// Writing game stuff to export:
+ 
+@@ -956,6 +964,7 @@
+ 		if(timeLog) {
+ 			System.out.println("Difference: "+(System.nanoTime()-timeStart)/1000000000f);
+ 		}
++		db.reset();
+ 	}
+ 	
+ 	private static boolean debug = false;
+@@ -967,12 +976,13 @@
+ 	}
+ 	
+ 	public static void importGame(File file) {
++		long importStarted = System.currentTimeMillis();
+ 		Main.game = new Game();
+ 		UtilText.initScriptEngine(); // Have to init the script engine before loading game variables as some classes (such as race) call parsing as part of their initialisation (Race's 'applyRaceChanges')
+ 		
+ 		if (file.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(file);
++				Document doc = DocBuilders.parseDoc(file);
+ 
+ 				long time = System.nanoTime();
+ 				if(debug) {
+@@ -1428,7 +1438,7 @@
+ 				}
+ 
+ 				// Add in new NPCS:
+-				Main.game.initUniqueNPCs();
++				initUniqueNPCs();
+ 
+ 				//TODO This needs more thorough testing...
+ 				// In versions prior to v0.4.1, deleted NPCs who had relationship or sex data with the player were moved to an empty tile instead of being deleted.
+@@ -2169,6 +2179,8 @@
+ 		Main.game.getPlayer().updateInventoryListeners();
+ 		Main.game.getPlayer().updateAttributeListeners(true);
+ 		Main.game.getPlayer().calculateStatusEffects(0);
++		if (Main.TIME_TESTING)
++			System.out.println("importGame took: " + (System.currentTimeMillis() - importStarted) + " ms");
+ 	}
+ 
+ 	@SuppressWarnings("unchecked")
+@@ -2231,9 +2243,11 @@
+ 	}
+ 	
+ 	public void initNewGame(DialogueNode startingDialogueNode) {
++		long timeStarted = System.currentTimeMillis();
+ 		NPCMap.clear();
++		NPCThread.deInitialize();
+ 		OffspringSeedMap.clear();
+-		initUniqueNPCs();
++		NPCRegistry.initUniqueNPCs();
+ 
+ 		// This is due to the fact that on new world creation, the player is placed at coordinates (0, 0), which reveals the three squares at the bottom left corner of the map:
+ 		Main.game.getActiveWorld().getCell(0, 0).setDiscovered(false);
+@@ -2249,6 +2263,8 @@
+ 		setStarted(true);
+ 		
+ 		setContent(new Response(startingDialogueNode.getLabel(), startingDialogueNode.getDescription(), startingDialogueNode));
++		if (Main.TIME_TESTING)
++			System.out.println("initNewGame took: " + (System.currentTimeMillis() - timeStarted) + " ms");
+ 	}
+ 	
+ 	/**
+@@ -2268,451 +2284,7 @@
+ 			MainController.updateUI();
+ 		}
+ 	}
+-	
+-	private void initUniqueNPCs() {
+-		// Set up NPCs:
+-		try {
+-			List<Class<? extends NPC>> addedNpcs = new ArrayList<>();
+-			
+-			// Misc.:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(GenericMaleNPC.class))) { addNPC(new GenericMaleNPC(), false); addedNpcs.add(GenericMaleNPC.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(GenericFemaleNPC.class))) { addNPC(new GenericFemaleNPC(), false);  addedNpcs.add(GenericFemaleNPC.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(GenericAndrogynousNPC.class))) { addNPC(new GenericAndrogynousNPC(), false); addedNpcs.add(GenericAndrogynousNPC.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(PrologueMale.class))) { addNPC(new PrologueMale(), false); addedNpcs.add(PrologueMale.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(PrologueFemale.class))) { addNPC(new PrologueFemale(), false); addedNpcs.add(PrologueFemale.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(GenericTrader.class))) { addNPC(new GenericTrader(), false); addedNpcs.add(GenericTrader.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(TestNPC.class))) { addNPC(new TestNPC(), false); addedNpcs.add(TestNPC.class); }
+-
+-			// Contributors:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Lumi.class))) { addNPC(new Lumi(), false); addedNpcs.add(Lumi.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Pazu.class))) { addNPC(new Pazu(), false); addedNpcs.add(Pazu.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Ashley.class))) { addNPC(new Ashley(), false); addedNpcs.add(Ashley.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Callie.class))) { addNPC(new Callie(), false); addedNpcs.add(Callie.class); }
+-			
+-			// Story:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Rose.class))) { addNPC(new Rose(), false); addedNpcs.add(Rose.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Lilaya.class))) { addNPC(new Lilaya(), false); addedNpcs.add(Lilaya.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Arthur.class))) { addNPC(new Arthur(), false); addedNpcs.add(Arthur.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Lyssieth.class))) { addNPC(new Lyssieth(), false); addedNpcs.add(Lyssieth.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Elizabeth.class))) { addNPC(new Elizabeth(), false); addedNpcs.add(Elizabeth.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Takahashi.class))) { addNPC(new Takahashi(), false); addedNpcs.add(Takahashi.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(DarkSiren.class))) { addNPC(new DarkSiren(), false); addedNpcs.add(DarkSiren.class); }
+-			
+-			if(addedNpcs.contains(Lilaya.class)) {
+-				getNpc(Lilaya.class).setAffection(Main.game.getPlayer(), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
+-				getNpc(Lilaya.class).setAffection(getNpc(Rose.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				getNpc(Lilaya.class).addSlave(getNpc(Rose.class));
+-				
+-				getNpc(Lilaya.class).setAffection(getNpc(Lyssieth.class), -60);
+-				getNpc(Lilaya.class).setAffection(getNpc(DarkSiren.class), 15);
+-				getNpc(Lilaya.class).setMother(getNpc(Lyssieth.class));
+-			}
+-			if(addedNpcs.contains(Rose.class)) {
+-				getNpc(Rose.class).setAffection(Main.game.getPlayer(), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
+-				getNpc(Rose.class).setAffection(getNpc(Lilaya.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				getNpc(Rose.class).setObedience(ObedienceLevel.POSITIVE_FIVE_SUBSERVIENT.getMedianValue());
+-				getNpc(Rose.class).setAffection(getNpc(Lyssieth.class), -40);
+-			}
+-			if(addedNpcs.contains(DarkSiren.class)) {
+-				getNpc(DarkSiren.class).setAffection(getNpc(Lyssieth.class), -25);
+-				getNpc(DarkSiren.class).setAffection(getNpc(Lilaya.class), 35);
+-				getNpc(DarkSiren.class).setMother(getNpc(Lyssieth.class));
+-			}
+-			if(addedNpcs.contains(Elizabeth.class)) {
+-				getNpc(Elizabeth.class).setMother(getNpc(Lyssieth.class));
+-				getNpc(Elizabeth.class).setAffection(getNpc(Lyssieth.class), 100);
+-			}
+-			if(addedNpcs.contains(Lyssieth.class)) {
+-				getNpc(Lyssieth.class).setAffection(getNpc(Lilaya.class), 100);
+-				getNpc(Lyssieth.class).setAffection(getNpc(DarkSiren.class), 50);
+-				getNpc(Lyssieth.class).setAffection(getNpc(Elizabeth.class), 75);
+-				getNpc(Lyssieth.class).setAffection(getNpc(Rose.class), -80);
+-			}
+-
+-			// Enforcers:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Brax.class))) { addNPC(new Brax(), false); addedNpcs.add(Brax.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(CandiReceptionist.class))) { addNPC(new CandiReceptionist(), false); addedNpcs.add(CandiReceptionist.class); }
+-			
+-			if(addedNpcs.contains(Brax.class)) {
+-				getNpc(Brax.class).setAffection(getNpc(CandiReceptionist.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(CandiReceptionist.class)) {
+-				getNpc(CandiReceptionist.class).setAffection(getNpc(Brax.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-			}
+-
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Wes.class))) { addNPC(new Wes(), false); addedNpcs.add(Wes.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Elle.class))) { addNPC(new Elle(), false); addedNpcs.add(Elle.class); }
+-
+-			if(addedNpcs.contains(Wes.class)) {
+-				getNpc(Wes.class).setAffection(getNpc(Elle.class), AffectionLevel.NEGATIVE_THREE_STRONG_DISLIKE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(Elle.class)) {
+-				getNpc(Elle.class).setAffection(getNpc(Wes.class), AffectionLevel.NEGATIVE_ONE_ANNOYED.getMedianValue());
+-			}
+-			
+-			// Shopping Promenade:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Ralph.class))) { addNPC(new Ralph(), false); addedNpcs.add(Ralph.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Nyan.class))) { addNPC(new Nyan(), false); addedNpcs.add(Nyan.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(NyanMum.class))) { addNPC(new NyanMum(), false); addedNpcs.add(NyanMum.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Vicky.class))) { addNPC(new Vicky(), false); addedNpcs.add(Vicky.class); }
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Pix.class))) { addNPC(new Pix(), false); addedNpcs.add(Pix.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Hannah.class))) { addNPC(new Hannah(), false); addedNpcs.add(Hannah.class); }
+-			if(addedNpcs.contains(Pix.class) || addedNpcs.contains(Hannah.class)) {
+-				Main.game.getNpc(Pix.class).setAffection(Main.game.getNpc(Hannah.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(Hannah.class).setAffection(Main.game.getNpc(Pix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Kate.class))) { addNPC(new Kate(), false); addedNpcs.add(Kate.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(SupplierLeader.class))) { addNPC(new SupplierLeader(), false); addedNpcs.add(SupplierLeader.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(SupplierPartner.class))) { addNPC(new SupplierPartner(), false); addedNpcs.add(SupplierPartner.class); }
+-
+-			if(addedNpcs.contains(Nyan.class) || addedNpcs.contains(NyanMum.class)) {
+-				Main.game.getNpc(Nyan.class).setAffection(Main.game.getNpc(NyanMum.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				Main.game.getNpc(NyanMum.class).setAffection(Main.game.getNpc(Nyan.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				
+-				Main.game.getNpc(Nyan.class).setAffection(Main.game.getNpc(Ashley.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-				Main.game.getNpc(Ashley.class).setAffection(Main.game.getNpc(Nyan.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
+-			}
+-			
+-			if(addedNpcs.contains(SupplierLeader.class)) {
+-				Main.game.getNpc(SupplierLeader.class).setAffection(Main.game.getNpc(SupplierPartner.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-				Main.game.getNpc(SupplierPartner.class).setAffection(Main.game.getNpc(SupplierLeader.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-			}
+-
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Kay.class))) { addNPC(new Kay(), false); addedNpcs.add(Kay.class); }
+-			if(addedNpcs.contains(Kay.class)) {
+-				Main.game.getNpc(Nyan.class).setAffection(Main.game.getNpc(Kay.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
+-				Main.game.getNpc(Kay.class).setAffection(Main.game.getNpc(Nyan.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
+-			}
+-			
+-			// Harpy nests:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Scarlett.class))) { addNPC(new Scarlett(), false); addedNpcs.add(Scarlett.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Helena.class))) { addNPC(new Helena(), false); addedNpcs.add(Helena.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HarpyBimbo.class))) { addNPC(new HarpyBimbo(), false); addedNpcs.add(HarpyBimbo.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HarpyBimboCompanion.class))) { addNPC(new HarpyBimboCompanion(), false); addedNpcs.add(HarpyBimboCompanion.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HarpyDominant.class))) { addNPC(new HarpyDominant(), false); addedNpcs.add(HarpyDominant.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HarpyDominantCompanion.class))) { addNPC(new HarpyDominantCompanion(), false); addedNpcs.add(HarpyDominantCompanion.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HarpyNympho.class))) { addNPC(new HarpyNympho(), false); addedNpcs.add(HarpyNympho.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HarpyNymphoCompanion.class))) { addNPC(new HarpyNymphoCompanion(), false); addedNpcs.add(HarpyNymphoCompanion.class); }
+-
+-			if(addedNpcs.contains(Scarlett.class)) {
+-				Main.game.getNpc(Scarlett.class).setAffection(Main.game.getPlayer(), AffectionLevel.NEGATIVE_TWO_DISLIKE.getMedianValue());
+-				Main.game.getNpc(Scarlett.class).setAffection(Main.game.getNpc(Helena.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				if(Main.game.getPlayer().hasQuest(QuestLine.MAIN) && Main.game.getPlayer().isQuestProgressGreaterThan(QuestLine.MAIN, Quest.MAIN_1_F_SCARLETTS_FATE)) {
+-					Main.game.getNpc(Scarlett.class).setLocation(WorldType.HARPY_NEST, PlaceType.HARPY_NESTS_HELENAS_NEST);
+-				}
+-			}
+-			if(addedNpcs.contains(Helena.class)) {
+-				Main.game.getNpc(Helena.class).setAffection(Main.game.getNpc(Scarlett.class), AffectionLevel.NEGATIVE_FOUR_HATE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(HarpyBimbo.class)) {
+-				Main.game.getNpc(HarpyBimbo.class).setAffection(Main.game.getNpc(HarpyBimboCompanion.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			if(addedNpcs.contains(HarpyBimboCompanion.class)) {
+-				Main.game.getNpc(HarpyBimboCompanion.class).setAffection(Main.game.getNpc(HarpyBimbo.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
+-			}
+-			if(addedNpcs.contains(HarpyDominant.class)) {
+-				Main.game.getNpc(HarpyDominant.class).setAffection(Main.game.getNpc(HarpyDominantCompanion.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
+-			}
+-			if(addedNpcs.contains(HarpyDominantCompanion.class)) {
+-				Main.game.getNpc(HarpyDominantCompanion.class).setAffection(Main.game.getNpc(HarpyDominant.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
+-			}
+-			if(addedNpcs.contains(HarpyNympho.class)) {
+-				Main.game.getNpc(HarpyNympho.class).setAffection(Main.game.getNpc(HarpyNymphoCompanion.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(HarpyNymphoCompanion.class)) {
+-				Main.game.getNpc(HarpyNymphoCompanion.class).setAffection(Main.game.getNpc(HarpyNympho.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
+-			}
+-			
+-			// City hall:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Vanessa.class))) { addNPC(new Vanessa(), false); addedNpcs.add(Vanessa.class); }
+-			
+-			// Dominion Express:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Natalya.class))) { addNPC(new Natalya(), false); addedNpcs.add(Natalya.class); }
+-			
+-			// Slaver alley:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Finch.class))) { addNPC(new Finch(), false); addedNpcs.add(Finch.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Sean.class))) { addNPC(new Sean(), false); addedNpcs.add(Sean.class); }
+-			if(addedNpcs.contains(Sean.class)) {
+-				getNpc(Brax.class).setPetName(Main.game.getNpc(Sean.class), Main.game.getNpc(Sean.class).getName(false));
+-			}
+-			
+-			// Rental mommy;
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(RentalMommy.class))) { addNPC(new RentalMommy(), false); addedNpcs.add(RentalMommy.class); }
+-			
+-			// 'Daddy':
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Daddy.class))) { addNPC(new Daddy(), false); addedNpcs.add(Daddy.class); }
+-			if(addedNpcs.contains(Daddy.class)) {
+-				getNpc(Rose.class).setAffection(getNpc(Daddy.class), -50);
+-			}
+-			
+-            // Sawlty Towers (Arthur/Felicia's apartment building):
+-            if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Felicia.class))) {
+-                addNPC(new Felicia(), false);
+-                addedNpcs.add(Felicia.class);
+-            }
+-            if(addedNpcs.contains(Felicia.class)) {
+-            	getNpc(Felicia.class).setAffection(getNpc(Arthur.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-            }
+-            
+-            // Lovienne's Luxuries:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Saellatrix.class))) { addNPC(new Saellatrix(), false); addedNpcs.add(Saellatrix.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Fiammetta.class))) { addNPC(new Fiammetta(), false); addedNpcs.add(Fiammetta.class); }
+-			if(addedNpcs.contains(Fiammetta.class)) {
+-				getNpc(Fiammetta.class).setAffection(getNpc(Saellatrix.class), -100);
+-				getNpc(Saellatrix.class).setAffection(getNpc(Fiammetta.class), -50);
+-			}
+-
+-			// Zaranix's home:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Zaranix.class))) { addNPC(new Zaranix(), false); addedNpcs.add(Zaranix.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Amber.class))) { addNPC(new Amber(), false); addedNpcs.add(Amber.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(ZaranixMaidKatherine.class))) { addNPC(new ZaranixMaidKatherine(), false); addedNpcs.add(ZaranixMaidKatherine.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(ZaranixMaidKelly.class))) { addNPC(new ZaranixMaidKelly(), false); addedNpcs.add(ZaranixMaidKelly.class); }
+-
+-			if(addedNpcs.contains(Zaranix.class)) {
+-				Main.game.getNpc(Zaranix.class).setAffection(Main.game.getNpc(ZaranixMaidKatherine.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(Zaranix.class).setAffection(Main.game.getNpc(ZaranixMaidKelly.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(Zaranix.class).setAffection(Main.game.getNpc(Amber.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(Amber.class)) {
+-				Main.game.getNpc(Amber.class).setAffection(Main.game.getNpc(Zaranix.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				Main.game.getNpc(Amber.class).setAffection(Main.game.getNpc(ZaranixMaidKelly.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(Amber.class).setAffection(Main.game.getNpc(ZaranixMaidKatherine.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			if(addedNpcs.contains(ZaranixMaidKatherine.class)) {
+-				Main.game.getNpc(ZaranixMaidKatherine.class).setAffection(Main.game.getNpc(Zaranix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(ZaranixMaidKatherine.class).setAffection(Main.game.getNpc(ZaranixMaidKelly.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(ZaranixMaidKatherine.class).setAffection(Main.game.getNpc(Amber.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			if(addedNpcs.contains(ZaranixMaidKelly.class)) {
+-				Main.game.getNpc(ZaranixMaidKelly.class).setAffection(Main.game.getNpc(Zaranix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(ZaranixMaidKelly.class).setAffection(Main.game.getNpc(ZaranixMaidKatherine.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(ZaranixMaidKelly.class).setAffection(Main.game.getNpc(Amber.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-
+-			// Angel's kiss:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Angel.class))) { addNPC(new Angel(), false); addedNpcs.add(Angel.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Bunny.class))) { addNPC(new Bunny(), false); addedNpcs.add(Bunny.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Loppy.class))) { addNPC(new Loppy(), false); addedNpcs.add(Loppy.class); }
+-			
+-			// Slime queen:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(SlimeQueen.class))) { addNPC(new SlimeQueen(), false); addedNpcs.add(SlimeQueen.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(SlimeGuardIce.class))) { addNPC(new SlimeGuardIce(), false); addedNpcs.add(SlimeGuardIce.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(SlimeGuardFire.class))) { addNPC(new SlimeGuardFire(), false); addedNpcs.add(SlimeGuardFire.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(SlimeRoyalGuard.class))) { addNPC(new SlimeRoyalGuard(), false); addedNpcs.add(SlimeRoyalGuard.class); }
+-			
+-			
+-			// Submission:
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Claire.class))) { addNPC(new Claire(), false); addedNpcs.add(Claire.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(FortressAlphaLeader.class))) { addNPC(new FortressAlphaLeader(), false); addedNpcs.add(FortressAlphaLeader.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(FortressFemalesLeader.class))) { addNPC(new FortressFemalesLeader(), false); addedNpcs.add(FortressFemalesLeader.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(FortressMalesLeader.class))) { addNPC(new FortressMalesLeader(), false); addedNpcs.add(FortressMalesLeader.class); }
+-			
+-			// Nightclub:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Jules.class))) { addNPC(new Jules(), false); addedNpcs.add(Jules.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Kruger.class))) { addNPC(new Kruger(), false); addedNpcs.add(Kruger.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Kalahari.class))) { addNPC(new Kalahari(), false); addedNpcs.add(Kalahari.class); }
+-
+-			if(addedNpcs.contains(Kalahari.class)) {
+-				Main.game.getNpc(Kalahari.class).setFather(Main.game.getNpc(Kruger.class));
+-				Main.game.getNpc(Kalahari.class).setAffection(Main.game.getNpc(Kruger.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(Kruger.class)) {
+-				Main.game.getNpc(Kruger.class).setAffection(Main.game.getNpc(Kalahari.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-			}
+-			
+-			// Gambling den:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Roxy.class))) { addNPC(new Roxy(), false); addedNpcs.add(Roxy.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Axel.class))) { addNPC(new Axel(), false); addedNpcs.add(Axel.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Epona.class))) { addNPC(new Epona(), false); addedNpcs.add(Epona.class); }
+-
+-			// Rat Warrens:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Vengar.class))) { addNPC(new Vengar(), false); addedNpcs.add(Vengar.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Shadow.class))) { addNPC(new Shadow(), false); addedNpcs.add(Shadow.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Silence.class))) { addNPC(new Silence(), false); addedNpcs.add(Silence.class); }
+-			if(addedNpcs.contains(Vengar.class)) {
+-				getNpc(Vengar.class).setAffection(getNpc(Shadow.class), 50);
+-				getNpc(Vengar.class).setAffection(getNpc(Silence.class), 50);
+-				getNpc(Shadow.class).setAffection(getNpc(Vengar.class), -10);
+-				getNpc(Shadow.class).setAffection(getNpc(Silence.class), 80);
+-				getNpc(Silence.class).setAffection(getNpc(Vengar.class), 20);
+-				getNpc(Silence.class).setAffection(getNpc(Shadow.class), 100);
+-			}
+-			if(Main.isVersionOlderThan(loadingVersion, "0.3.5.6")) {
+-				getNpc(Roxy.class).setAffection(getNpc(Vengar.class), -80);
+-				getNpc(Vengar.class).setAffection(getNpc(Roxy.class), 50);
+-			}
+-			if(Main.isVersionOlderThan(loadingVersion, "0.3.5.9")) {
+-				getNpc(Silence.class).setAffection(getNpc(Shadow.class), 100);
+-				getNpc(Silence.class).getAffectionMap().remove(getNpc(Silence.class).getId());
+-			}
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Murk.class))) { addNPC(new Murk(), false); addedNpcs.add(Murk.class); }
+-
+-			// Hazmat Rat:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HazmatRat.class))) { addNPC(new HazmatRat(), false); addedNpcs.add(HazmatRat.class); }
+-			
+-			
+-			// Elis:
+-
+-			// The Red Dragon:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Flash.class))) { addNPC(new Flash(), false); addedNpcs.add(Flash.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Jess.class))) { addNPC(new Jess(), false); addedNpcs.add(Jess.class); }
+-
+-			if(addedNpcs.contains(Flash.class) || addedNpcs.contains(Jess.class)) {
+-				Main.game.getNpc(Jess.class).setAffection(Main.game.getNpc(Flash.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				Main.game.getNpc(Flash.class).setAffection(Main.game.getNpc(Jess.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			
+-			// Astrapi/Vronti/Kheiron:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Astrapi.class))) { addNPC(new Astrapi(), false); addedNpcs.add(Astrapi.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Vronti.class))) { addNPC(new Vronti(), false); addedNpcs.add(Vronti.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Kheiron.class))) { addNPC(new Kheiron(), false); addedNpcs.add(Kheiron.class); }
+-
+-			if(addedNpcs.contains(Astrapi.class) || addedNpcs.contains(Vronti.class) || addedNpcs.contains(Kheiron.class)) {
+-				Main.game.getNpc(Astrapi.class).setAffection(Main.game.getNpc(Vronti.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				Main.game.getNpc(Astrapi.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				
+-				Main.game.getNpc(Vronti.class).setAffection(Main.game.getNpc(Astrapi.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				Main.game.getNpc(Vronti.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-
+-				Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Astrapi.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Vronti.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-
+-				getNpc(Astrapi.class).setFather(getNpc(Kheiron.class));
+-				getNpc(Vronti.class).setFather(getNpc(Kheiron.class));
+-			}
+-			
+-			// Minotallys/Arion
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Arion.class))) { addNPC(new Arion(), false); addedNpcs.add(Arion.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Minotallys.class))) { addNPC(new Minotallys(), false); addedNpcs.add(Minotallys.class); }
+-
+-			if(addedNpcs.contains(Arion.class) || addedNpcs.contains(Minotallys.class)) {
+-				Main.game.getNpc(Arion.class).setAffection(Main.game.getNpc(Minotallys.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
+-				Main.game.getNpc(Minotallys.class).setAffection(Main.game.getNpc(Arion.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-			}
+-			
+-			// Farmer's Market:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Fae.class))) { addNPC(new Fae(), false); addedNpcs.add(Fae.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Silvia.class))) { addNPC(new Silvia(), false); addedNpcs.add(Silvia.class); }
+-
+-			if(addedNpcs.contains(Fae.class) || addedNpcs.contains(Silvia.class)) {
+-				Main.game.getNpc(Silvia.class).setAffection(Main.game.getNpc(Fae.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-				Main.game.getNpc(Fae.class).setAffection(Main.game.getNpc(Silvia.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-			}
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Kazik.class))) { addNPC(new Kazik(), false); addedNpcs.add(Kazik.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Yui.class))) { addNPC(new Yui(), false); addedNpcs.add(Yui.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Nizhoni.class))) { addNPC(new Nizhoni(), false); addedNpcs.add(Nizhoni.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Moreno.class))) { addNPC(new Moreno(), false); addedNpcs.add(Moreno.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Heather.class))) { addNPC(new Heather(), false); addedNpcs.add(Heather.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Ziva.class))) { addNPC(new Ziva(), false); addedNpcs.add(Ziva.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Eisek.class))) { addNPC(new Eisek(), false); addedNpcs.add(Eisek.class); }
+-
+-			// Wall's End:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Monica.class))) { addNPC(new Monica(), false); addedNpcs.add(Monica.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Ceridwen.class))) { addNPC(new Ceridwen(), false); addedNpcs.add(Ceridwen.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Imsu.class))) { addNPC(new Imsu(), false); addedNpcs.add(Imsu.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Hale.class))) { addNPC(new Hale(), false); addedNpcs.add(Hale.class); }
+-			if(addedNpcs.contains(Imsu.class) || addedNpcs.contains(Hale.class)) {
+-				Main.game.getNpc(Imsu.class).setAffection(Main.game.getNpc(Hale.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-				Main.game.getNpc(Hale.class).setAffection(Main.game.getNpc(Imsu.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-			}
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Penelope.class))) { addNPC(new Penelope(), false); addedNpcs.add(Penelope.class); }
+-			if(addedNpcs.contains(Penelope.class) || addedNpcs.contains(Pix.class) || Main.isVersionOlderThan(Game.loadingVersion, "0.4.2.7")) {
+-				Main.game.getNpc(Penelope.class).setAffection(Main.game.getNpc(Pix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(Pix.class).setAffection(Main.game.getNpc(Penelope.class), AffectionLevel.NEGATIVE_ONE_ANNOYED.getMedianValue());
+-			}
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Belle.class))) { addNPC(new Belle(), false); addedNpcs.add(Belle.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Daphne.class))) { addNPC(new Daphne(), false); addedNpcs.add(Daphne.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Farah.class))) { addNPC(new Farah(), false); addedNpcs.add(Farah.class); }
+-
+-			// The Crossed Blades:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Oglix.class))) { addNPC(new Oglix(), false); addedNpcs.add(Oglix.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Golix.class))) { addNPC(new Golix(), false); addedNpcs.add(Golix.class); }
+-			if(addedNpcs.contains(Oglix.class)) {
+-				Main.game.getNpc(Oglix.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-				Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Oglix.class), AffectionLevel.NEGATIVE_THREE_STRONG_DISLIKE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(Golix.class)) {
+-				((Oglix)Main.game.getNpc(Oglix.class)).createElemental(); // inits the summoner ID
+-				Main.game.getNpc(Kheiron.class).setAffection(Main.game.getNpc(Golix.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
+-				Main.game.getNpc(Golix.class).setAffection(Main.game.getNpc(Kheiron.class), AffectionLevel.POSITIVE_FOUR_LOVE.getMedianValue());
+-			}
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Wynter.class))) { addNPC(new Wynter(), false); addedNpcs.add(Wynter.class); }
+-
+-			// Enforcer station:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Sterope.class))) { addNPC(new Sterope(), false); addedNpcs.add(Sterope.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Hammer.class))) { addNPC(new Hammer(), false); addedNpcs.add(Hammer.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Ghost.class))) { addNPC(new Ghost(), false); addedNpcs.add(Ghost.class); }
+-			if(addedNpcs.contains(Hammer.class)) {
+-				Main.game.getNpc(Hammer.class).setAffection(Main.game.getNpc(Ghost.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-				Main.game.getNpc(Ghost.class).setAffection(Main.game.getNpc(Hammer.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Angelixx.class))) { addNPC(new Angelixx(), false); addedNpcs.add(Angelixx.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Sleip.class))) { addNPC(new Sleip(), false); addedNpcs.add(Sleip.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Nir.class))) { addNPC(new Nir(), false); addedNpcs.add(Nir.class); }
+-			if(addedNpcs.contains(Angelixx.class) || addedNpcs.contains(Saellatrix.class)) {
+-				Main.game.getNpc(Angelixx.class).setAffection(Main.game.getNpc(Sleip.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-				Main.game.getNpc(Angelixx.class).setAffection(Main.game.getNpc(Nir.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-
+-				Main.game.getNpc(Saellatrix.class).setAffection(Main.game.getNpc(Angelixx.class), AffectionLevel.NEGATIVE_THREE_STRONG_DISLIKE.getMedianValue());
+-				Main.game.getNpc(Angelixx.class).setAffection(Main.game.getNpc(Saellatrix.class), AffectionLevel.NEGATIVE_TWO_DISLIKE.getMedianValue());
+-			}
+-			if(addedNpcs.contains(Saellatrix.class) || Main.isVersionOlderThan(Game.loadingVersion, "0.4.9.12")) {
+-				Main.game.getNpc(Saellatrix.class).setAffection(Main.game.getNpc(Lilaya.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-				Main.game.getNpc(Lilaya.class).setAffection(Main.game.getNpc(Saellatrix.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			if(addedNpcs.contains(Sleip.class)) {
+-				getNpc(Sleip.class).setMother(getNpc(Angelixx.class));
+-				Main.game.getNpc(Sleip.class).setAffection(Main.game.getNpc(Angelixx.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
+-				Main.game.getNpc(Sleip.class).setAffection(Main.game.getNpc(Nir.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			if(addedNpcs.contains(Nir.class)) {
+-				getNpc(Nir.class).setMother(getNpc(Angelixx.class));
+-				Main.game.getNpc(Nir.class).setAffection(Main.game.getNpc(Angelixx.class), AffectionLevel.POSITIVE_FIVE_WORSHIP.getMedianValue());
+-				Main.game.getNpc(Nir.class).setAffection(Main.game.getNpc(Sleip.class), AffectionLevel.POSITIVE_THREE_CARING.getMedianValue());
+-			}
+-			
+-			// Evelyx's Dairy:
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Evelyx.class))) { addNPC(new Evelyx(), false); addedNpcs.add(Evelyx.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Dale.class))) { addNPC(new Dale(), false); addedNpcs.add(Dale.class); }
+-			if(addedNpcs.contains(Evelyx.class) || addedNpcs.contains(Dale.class)) {
+-				Main.game.getNpc(Evelyx.class).setAffection(Main.game.getNpc(Dale.class), AffectionLevel.POSITIVE_TWO_LIKE.getMedianValue());
+-				Main.game.getNpc(Dale.class).setAffection(Main.game.getNpc(Evelyx.class), AffectionLevel.POSITIVE_ONE_FRIENDLY.getMedianValue());
+-			}
+ 
+-			// Headless horseman:
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(HeadlessHorseman.class))) { addNPC(new HeadlessHorseman(), false); addedNpcs.add(HeadlessHorseman.class); }
+-			
+-			// Themiscyra:
+-			
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Lunexis.class))) { addNPC(new Lunexis(), false); addedNpcs.add(Lunexis.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Ursa.class))) { addNPC(new Ursa(), false); addedNpcs.add(Ursa.class); }
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Aurokaris.class))) { addNPC(new Aurokaris(), false); addedNpcs.add(Aurokaris.class); }
+-			
+-			// Elder lilin:
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Lunette.class))) { addNPC(new Lunette(), false); addedNpcs.add(Lunette.class); }
+-			if(addedNpcs.contains(Lunette.class)) {
+-				getNpc(Lunexis.class).setMother(getNpc(Lunette.class));
+-				getNpc(Lunexis.class).setAffection(getNpc(Lunette.class), 100);
+-			}
+-			if(!Main.game.NPCMap.containsKey(Main.game.getUniqueNPCId(Lovienne.class))) { addNPC(new Lovienne(), false); addedNpcs.add(Lovienne.class); }
+-			if(addedNpcs.contains(Lovienne.class)) {
+-				getNpc(Angelixx.class).setMother(getNpc(Lovienne.class));
+-				getNpc(Angelixx.class).setAffection(getNpc(Lovienne.class), 100);
+-				getNpc(Saellatrix.class).setMother(getNpc(Lovienne.class));
+-				getNpc(Saellatrix.class).setAffection(getNpc(Lovienne.class), 100);
+-			}
+-			
+-		} catch (Exception e) {
+-			e.printStackTrace();
+-		}
+-	}
+ 
+ 	// Main updating for game mechanics, as everything is based on turns.
+ 	public void endTurn(int secondsPassed) {
+@@ -6502,4 +6074,4 @@
+ 						+ UtilText.parse(character, "You start having sex with [npc.name]")
+ 					+ "</p>"));
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/inventory/AbstractSetBonus.java liliths-throne-public/src/com/lilithsthrone/game/inventory/AbstractSetBonus.java
+--- liliths-throne-base/src/com/lilithsthrone/game/inventory/AbstractSetBonus.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/inventory/AbstractSetBonus.java	2025-03-13 21:02:55.000106167 -0400
+@@ -6,6 +6,7 @@
+ import java.util.List;
+ import java.util.Set;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -50,7 +51,7 @@
+ 	public AbstractSetBonus(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -166,4 +167,4 @@
+ 	public List<InventorySlot> getBlockedSlotsCountingTowardsFullSet() {
+ 		return blockedSlotsCountingTowardsFullSet;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/inventory/CharacterInventory.java liliths-throne-public/src/com/lilithsthrone/game/inventory/CharacterInventory.java
+--- liliths-throne-base/src/com/lilithsthrone/game/inventory/CharacterInventory.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/inventory/CharacterInventory.java	2025-03-13 21:02:55.002106162 -0400
+@@ -11,6 +11,7 @@
+ import java.util.Set;
+ import java.util.stream.Collectors;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ import org.w3c.dom.NodeList;
+@@ -50,6 +51,8 @@
+ import com.lilithsthrone.utils.comparators.ReverseClothingZLayerComparator;
+ import com.lilithsthrone.world.World;
+ 
++import javax.xml.parsers.DocumentBuilder;
++
+ /**
+  * Inventory for a Character. Tracks weapons equipped, clothes worn & inventory space.<br/>
+  * Only the very bravest dare venture past line 901.
+@@ -120,11 +123,12 @@
+ 	}
+ 	
+ 	public static CharacterInventory getCopyOfInventory(CharacterInventory inventoryToCopy) {
+-		Document doc = Main.getDocBuilder().newDocument();
++		DocumentBuilder db = DocBuilders.getNextDocBuilder();
++		Document doc = db.newDocument();
+ 		Element mainNode = doc.createElement("mainNode");
+ 		inventoryToCopy.saveAsXML(mainNode, doc);
+ 		CharacterInventory newInventory = loadFromXML(mainNode, doc);
+-		
++		db.reset();
+ 		return newInventory;
+ 	}
+ 	
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/inventory/weapon/AbstractWeaponType.java liliths-throne-public/src/com/lilithsthrone/game/inventory/weapon/AbstractWeaponType.java
+--- liliths-throne-base/src/com/lilithsthrone/game/inventory/weapon/AbstractWeaponType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/inventory/weapon/AbstractWeaponType.java	2025-03-13 21:02:55.006106151 -0400
+@@ -18,6 +18,7 @@
+ import java.util.stream.Collectors;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -125,7 +126,7 @@
+ 
+ 		if (weaponXMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(weaponXMLFile);
++				Document doc = DocBuilders.parseDoc(weaponXMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -1076,4 +1077,4 @@
+ 	public List<ItemTag> getItemTags() {
+ 		return itemTags;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/Properties.java liliths-throne-public/src/com/lilithsthrone/game/Properties.java
+--- liliths-throne-base/src/com/lilithsthrone/game/Properties.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/Properties.java	2025-03-13 21:02:54.921106373 -0400
+@@ -9,12 +9,14 @@
+ import java.util.Map.Entry;
+ import java.util.Set;
+ 
++import javax.xml.parsers.DocumentBuilder;
+ import javax.xml.transform.OutputKeys;
+ import javax.xml.transform.Transformer;
+ import javax.xml.transform.TransformerException;
+ import javax.xml.transform.dom.DOMSource;
+ import javax.xml.transform.stream.StreamResult;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Attr;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+@@ -297,7 +299,8 @@
+ 	
+ 	public void savePropertiesAsXML(){
+ 		try {
+-			Document doc = Main.getDocBuilder().newDocument();
++			DocumentBuilder db = DocBuilders.getNextDocBuilder();
++			Document doc = db.newDocument();
+ 			Element properties = doc.createElement("properties");
+ 			doc.appendChild(properties);
+ 
+@@ -654,7 +657,8 @@
+ 			StreamResult result = new StreamResult("data/properties.xml");
+ 		
+ 			transformer.transform(source, result);
+-		
++
++			db.reset();
+ 		} catch (TransformerException e) {
+ 			e.printStackTrace();
+ 		}
+@@ -673,7 +677,7 @@
+ 		if (new File("data/properties.xml").exists())
+ 			try {
+ 				File propertiesXML = new File("data/properties.xml");
+-				Document doc = Main.getDocBuilder().parse(propertiesXML);
++				Document doc = DocBuilders.parseDoc(propertiesXML);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -1711,4 +1715,4 @@
+ 		this.hairGrowth = hairGrowth;
+ 	}
+ 	
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/sex/managers/SexManagerExternal.java liliths-throne-public/src/com/lilithsthrone/game/sex/managers/SexManagerExternal.java
+--- liliths-throne-base/src/com/lilithsthrone/game/sex/managers/SexManagerExternal.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/sex/managers/SexManagerExternal.java	2025-03-13 21:02:55.007106149 -0400
+@@ -10,6 +10,7 @@
+ import java.util.Map.Entry;
+ import java.util.Set;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -779,7 +780,7 @@
+ 		
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -1942,4 +1943,4 @@
+ 			return SexAreaPenetration.valueOf(areaId.replace("PENETRATION_", ""));
+ 		}
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/game/sex/sexActions/SexActionExternal.java liliths-throne-public/src/com/lilithsthrone/game/sex/sexActions/SexActionExternal.java
+--- liliths-throne-base/src/com/lilithsthrone/game/sex/sexActions/SexActionExternal.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/game/sex/sexActions/SexActionExternal.java	2025-03-13 21:02:55.008106146 -0400
+@@ -5,6 +5,7 @@
+ import java.util.HashMap;
+ import java.util.List;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -68,7 +69,7 @@
+ 		
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -320,4 +321,4 @@
+ 		}
+ 		return "[style.italicsRed(Error: No suitable description found for this action!)]";
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/main/Main.java liliths-throne-public/src/com/lilithsthrone/main/Main.java
+--- liliths-throne-base/src/com/lilithsthrone/main/Main.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/main/Main.java	2025-03-13 21:02:55.011106138 -0400
+@@ -40,6 +40,7 @@
+ import com.lilithsthrone.game.dialogue.utils.MapTravelType;
+ import com.lilithsthrone.game.dialogue.utils.OptionsDialogue;
+ import com.lilithsthrone.game.sex.Sex;
++import com.lilithsthrone.threading.PreInitializationThread;
+ import com.lilithsthrone.utils.CreditsSlot;
+ import com.lilithsthrone.utils.Util;
+ import com.lilithsthrone.utils.colours.PresetColour;
+@@ -72,15 +73,16 @@
+ 	public static Game game;
+ 	public static Sex sex;
+ 	public static Combat combat;
++	public static Main instance;
++	public static Thread currentThread;
++
++	public static final boolean TIME_TESTING = true;
++	public static long TIME_STARTED;
+ 
+ 	public static TransformerFactory transformerFactory = TransformerFactory.newInstance();
+-	private static DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+-	private static DocumentBuilder docBuilder;
+ 
+ 	public static MainController mainController;
+-
+ 	public static Scene mainScene;
+-
+ 	public static Stage primaryStage;
+ 	
+ 	public static final String AUTHOR = "Innoxia";
+@@ -497,6 +499,9 @@
+ 		}
+ 
+ 		mainController = loader.getController();
++		currentThread = Thread.currentThread();
++		currentThread.setName("Main Thread");
++		instance = this;
+ 		Main.primaryStage.setScene(mainScene);
+ 		Main.primaryStage.show();
+ 		Main.game = new Game();
+@@ -522,8 +527,14 @@
+ 			e.printStackTrace();
+ 		}
+ 		
++		resetContent();
++		if (TIME_TESTING)
++			System.out.println("Time taken to startup : " + (System.currentTimeMillis() - TIME_STARTED) + " ms");
++	}
++
++	public void resetContent() {
++//		System.out.println(Thread.currentThread().getName() + " is resetting content.");
+ 		Main.game.setContent(new Response("", "", OptionsDialogue.MENU));
+-		
+ 	}
+ 	
+ 	protected static void CheckForDataDirectory() {
+@@ -602,17 +613,6 @@
+ 		return Paths.get(path).toUri().toString().replaceAll("%20", " ");
+ 	}
+ 
+-	public static DocumentBuilder getDocBuilder() {
+-		if (docBuilder == null) {
+-			try {
+-				docBuilder = docFactory.newDocumentBuilder();
+-			} catch (ParserConfigurationException e) {
+-				e.printStackTrace();
+-			}
+-		}
+-		return docBuilder;
+-	}
+-
+ 	public static String getPatchNotes() {
+ 		if (!patchNotes.isEmpty()) {
+ 			return patchNotes;
+@@ -659,6 +659,7 @@
+ 	}
+ 
+ 	public static void main(String[] args) {
++		TIME_STARTED = System.currentTimeMillis();
+ 		
+ 		// Create folders:
+ 		File dir = new File("data/");
+@@ -713,6 +714,8 @@
+ 			properties.savePropertiesAsXML();
+ 		}
+ 
++		PreInitializationThread.preloadData();
++
+ 		launch(args);
+ 	}
+ 	
+@@ -1120,4 +1123,4 @@
+ 	public static void saveProperties() {
+ 		properties.savePropertiesAsXML();
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/rendering/Artwork.java liliths-throne-public/src/com/lilithsthrone/rendering/Artwork.java
+--- liliths-throne-base/src/com/lilithsthrone/rendering/Artwork.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/rendering/Artwork.java	2025-03-13 21:02:55.011106138 -0400
+@@ -6,6 +6,7 @@
+ import java.util.List;
+ 
+ import com.lilithsthrone.main.Main;
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ import org.w3c.dom.NodeList;
+@@ -48,7 +49,7 @@
+ 			for(File subFile : dir.listFiles(textFilter)) {
+ 				if (subFile.exists()) {
+ 					try {
+-						Document doc = Main.getDocBuilder().parse(subFile);
++						Document doc = DocBuilders.parseDoc(subFile);
+ 						
+ 						// Cast magic:
+ 						doc.getDocumentElement().normalize();
+@@ -185,4 +186,4 @@
+ 		imagePaths.addAll(nakedImages);
+ 		return imagePaths;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/threading/DocBuilders.java liliths-throne-public/src/com/lilithsthrone/threading/DocBuilders.java
+--- liliths-throne-base/src/com/lilithsthrone/threading/DocBuilders.java	1969-12-31 19:00:00.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/threading/DocBuilders.java	2025-03-13 21:02:55.012106136 -0400
+@@ -0,0 +1,66 @@
++package com.lilithsthrone.threading;
++
++import org.w3c.dom.Document;
++
++import javax.xml.parsers.DocumentBuilder;
++import javax.xml.parsers.DocumentBuilderFactory;
++import java.io.File;
++import java.util.ArrayList;
++
++/**
++ * @since 0.4.10.7
++ * @version 0.4.10.7
++ * @author KeldonSlayer (DrZed)
++ */
++public class DocBuilders {
++    /* Multiple DocBuilders for the threads to effectively get one each */
++    private static final ArrayList<DocumentBuilderFactory> docFactories = new ArrayList<>();
++    private static final ArrayList<DocumentBuilder> docBuilders = new ArrayList<>();
++
++    /* This reduces failures */
++    public static Document parseDoc(File xmlFile) {
++        Document doc;
++        do {
++            doc = parseResetGet(xmlFile);
++        } while (doc == null);// since we return null if the doc builder is busy, this basically says "try the next one"
++        return doc;
++    }
++
++    /* Try, try again */
++    private static Document parseResetGet(File xmlFile) {
++        if (!xmlFile.exists()) {
++            System.err.println("File doesn't exist : " + xmlFile.getPath());
++            return null;
++        }
++        Document doc;
++        try {
++            DocumentBuilder db = getNextDocBuilder();
++            doc = db.parse(xmlFile);
++            db.reset();// resetting is only mildly important
++        } catch (Exception ignored) {
++            return null; // Exception Thrown is a Concurrency Issue, since JAX is not thread-safe
++        }// We Catch/Try again because that just means the doc builder sent out was still being used by another thread.
++        return doc;
++    }
++
++    /* Initializing with 7 was found to be the sweet spot of efficiency */
++    private static void initBuilders() {
++        for (int i = 0; i < 7; i++) // You can increase this number, for faster loading, however it's diminishing returns.
++            docFactories.add(DocumentBuilderFactory.newInstance());
++        try {
++            for (DocumentBuilderFactory docFactory : docFactories)
++                docBuilders.add(docFactory.newDocumentBuilder());
++        } catch (Exception ignored) {}
++    }
++
++    private static int docBuilderIndex = 0;
++
++    public static DocumentBuilder getNextDocBuilder() {
++        if (docFactories.isEmpty())
++            initBuilders();
++        docBuilderIndex++;
++        if (docBuilderIndex >= docBuilders.size())
++            docBuilderIndex = 0;
++        return docBuilders.get(docBuilderIndex);
++    }
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/threading/NPCThread.java liliths-throne-public/src/com/lilithsthrone/threading/NPCThread.java
+--- liliths-throne-base/src/com/lilithsthrone/threading/NPCThread.java	1969-12-31 19:00:00.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/threading/NPCThread.java	2025-03-13 21:02:55.012106136 -0400
+@@ -0,0 +1,147 @@
++package com.lilithsthrone.threading;
++
++import com.lilithsthrone.game.character.npc.NPCRegistry;
++
++import java.util.concurrent.atomic.AtomicBoolean;
++
++/**
++ * @since 0.4.10.7
++ * @version 0.4.10.7
++ * @author KeldonSlayer (DrZed)
++ */
++public class NPCThread extends Thread {
++    /* Threads are named after the exact function they are responsible for, this makes debugging threads easier. */
++    private static final AtomicBoolean
++            NPC_DOMINION_INITIALIZED = new AtomicBoolean(false), NPC_ENFORCER_INITIALIZED = new AtomicBoolean(false),
++            NPC_SHOPPING_INITIALIZED = new AtomicBoolean(false), NPC_HARPY_NEST_INITIALIZED = new AtomicBoolean(false),
++            NPC_MISC_INITIALIZED = new AtomicBoolean(false), NPC_ASSORTED_INITIALIZED = new AtomicBoolean(false),
++            NPC_SPECIAL_LOCATION_INITIALIZED = new AtomicBoolean(false), NPC_WALLS_END_INITIALIZED = new AtomicBoolean(false),
++            NPC_ELIS_INITIALIZED = new AtomicBoolean(false), NPC_FIELDS_INITIALIZED = new AtomicBoolean(false),
++            NPC_FARMERS_MARKET_INITIALIZED = new AtomicBoolean(false), NPC_SUBMISSION_INITIALIZED = new AtomicBoolean(false);
++
++    public NPCThread(String name) {
++        super(name);
++    }
++
++    @Override
++    public void run() {
++        if (npcsInitialized())
++            return;
++        switch (this.getName()) {
++            case "initMiscNPCs": {
++                if (!NPC_MISC_INITIALIZED.get()) {
++                    NPCRegistry.initMiscNPCs();
++                    NPC_MISC_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initDominionNPCs": {
++                if (!NPC_DOMINION_INITIALIZED.get()) {
++                    NPCRegistry.initDominionNPCs();
++                    NPC_DOMINION_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initEnforcerNPCs": {
++                if (!NPC_ENFORCER_INITIALIZED.get()) {
++                    NPCRegistry.initEnforcerNPCs();
++                    NPC_ENFORCER_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initShoppingNPCs": {
++                if (!NPC_SHOPPING_INITIALIZED.get()) {
++                    NPCRegistry.initShoppingNPCs();
++                    NPC_SHOPPING_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initHarpyNestNPCs": {
++                if (!NPC_HARPY_NEST_INITIALIZED.get()) {
++                    NPCRegistry.initHarpyNestNPCs();
++                    NPC_HARPY_NEST_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initAssortedNPCs": {
++                if (!NPC_ASSORTED_INITIALIZED.get()) {
++                    NPCRegistry.initAssortedNPCs();
++                    NPC_ASSORTED_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initSpecialLocationNPCs": {
++                if (!NPC_SPECIAL_LOCATION_INITIALIZED.get()) {
++                    NPCRegistry.initSpecialLocationNPCs();
++                    NPC_SPECIAL_LOCATION_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initFieldsNPCs": {
++                if (!NPC_FIELDS_INITIALIZED.get()) {
++                    NPCRegistry.initFieldsNPCs();
++                    NPC_FIELDS_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initElisNPCs": {
++                if (!NPC_ELIS_INITIALIZED.get()) {
++                    NPCRegistry.initElisNPCs();
++                    NPC_ELIS_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initFarmersMarketNPCs": {
++                if (!NPC_FARMERS_MARKET_INITIALIZED.get()) {
++                    NPCRegistry.initFarmersMarketNPCs();
++                    NPC_FARMERS_MARKET_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initWallsEndNPCs": {
++                if (!NPC_WALLS_END_INITIALIZED.get()) {
++                    NPCRegistry.initWallsEndNPCs();
++                    NPC_WALLS_END_INITIALIZED.set(true);
++                }
++                break;
++            }
++            case "initSubmissionNPCs": {
++                if (!NPC_SUBMISSION_INITIALIZED.get()) {
++                    NPCRegistry.initSubmissionNPCs();
++                    NPC_SUBMISSION_INITIALIZED.set(true);
++                }
++                break;
++            }
++        }
++    }
++
++    public static boolean npcsInitialized() {
++        return NPC_MISC_INITIALIZED.get() &&
++                NPC_DOMINION_INITIALIZED.get() &&
++                NPC_ENFORCER_INITIALIZED.get() &&
++                NPC_SHOPPING_INITIALIZED.get() &&
++                NPC_HARPY_NEST_INITIALIZED.get() &&
++                NPC_ASSORTED_INITIALIZED.get() &&
++                NPC_SPECIAL_LOCATION_INITIALIZED.get() &&
++                NPC_FIELDS_INITIALIZED.get() &&
++                NPC_ELIS_INITIALIZED.get() &&
++                NPC_FARMERS_MARKET_INITIALIZED.get() &&
++                NPC_WALLS_END_INITIALIZED.get() &&
++                NPC_SUBMISSION_INITIALIZED.get();
++    }
++
++    public static void deInitialize() {
++        NPC_MISC_INITIALIZED.set(false);
++        NPC_DOMINION_INITIALIZED.set(false);
++        NPC_ENFORCER_INITIALIZED.set(false);
++        NPC_SHOPPING_INITIALIZED.set(false);
++        NPC_HARPY_NEST_INITIALIZED.set(false);
++        NPC_ASSORTED_INITIALIZED.set(false);
++        NPC_SPECIAL_LOCATION_INITIALIZED.set(false);
++        NPC_FIELDS_INITIALIZED.set(false);
++        NPC_ELIS_INITIALIZED.set(false);
++        NPC_FARMERS_MARKET_INITIALIZED.set(false);
++        NPC_WALLS_END_INITIALIZED.set(false);
++        NPC_SUBMISSION_INITIALIZED.set(false);
++    }
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/threading/PreInitializationThread.java liliths-throne-public/src/com/lilithsthrone/threading/PreInitializationThread.java
+--- liliths-throne-base/src/com/lilithsthrone/threading/PreInitializationThread.java	1969-12-31 19:00:00.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/threading/PreInitializationThread.java	2025-03-13 21:02:55.013106133 -0400
+@@ -0,0 +1,466 @@
++package com.lilithsthrone.threading;
++
++import com.lilithsthrone.game.character.body.coverings.BodyCoveringType;
++import com.lilithsthrone.game.character.body.types.*;
++import com.lilithsthrone.game.character.effects.Perk;
++import com.lilithsthrone.game.character.race.Race;
++import com.lilithsthrone.game.dialogue.utils.UtilText;
++import com.lilithsthrone.main.Main;
++import com.lilithsthrone.world.WorldType;
++import com.lilithsthrone.world.places.PlaceType;
++import javafx.application.Platform;
++
++import java.util.concurrent.atomic.AtomicBoolean;
++
++/**
++ * @since 0.4.10.7
++ * @version 0.4.10.7
++ * @author KeldonSlayer (DrZed)
++ */
++public class PreInitializationThread  extends Thread {
++    /* The next step to improving this is investigating why certain ones take so long, likely due to XML parsing not certain */
++
++    /* Debug in name only, it's for timing the threads to find the slowest source, PRINT_COUNT allows ensuring the thresholds are met safely */
++    private static final boolean DEBUG_PRE_INIT = false, PRINT_COUNT = false, MULTITHREADED_PRELOADING = true;
++    public static PreInitializationThread HelperThread1, HelperThread2, HelperThread3, HelperThread4; /* 4 threads was the middle ground of Threads Needed, and efficiency. A 5th thread is a little faster, if you time and cluster the fastest ones on another thread */
++    public static final AtomicBoolean INIT_BODY_COVERING_TYPE = new AtomicBoolean(false),
++            INIT_RACES = new AtomicBoolean(false), INIT_BREASTS = new AtomicBoolean(false),
++            INIT_ANTENNA = new AtomicBoolean(false), INIT_ANUS = new AtomicBoolean(false),
++            INIT_ARM = new AtomicBoolean(false), INIT_ASS = new AtomicBoolean(false),
++            INIT_EAR = new AtomicBoolean(false), INIT_EYE = new AtomicBoolean(false),
++            INIT_FACE = new AtomicBoolean(false), INIT_FLUID = new AtomicBoolean(false),
++            INIT_FOOT = new AtomicBoolean(false), INIT_HAIR = new AtomicBoolean(false),
++            INIT_HORN = new AtomicBoolean(false), INIT_LEG = new AtomicBoolean(false),
++            INIT_MOUTH = new AtomicBoolean(false), INIT_NIPPLE = new AtomicBoolean(false),
++            INIT_PENIS = new AtomicBoolean(false), INIT_TAIL = new AtomicBoolean(false),
++            INIT_TENTACLE = new AtomicBoolean(false), INIT_TESTICLE = new AtomicBoolean(false),
++            INIT_TONGUE = new AtomicBoolean(false), INIT_TORSO = new AtomicBoolean(false),
++            INIT_VAGINA = new AtomicBoolean(false), INIT_WING = new AtomicBoolean(false),
++            INIT_WORLD = new AtomicBoolean(false), INIT_PLACE = new AtomicBoolean(false);
++    private static boolean hasRedrawnMainScene = false;// safety check, funny because I don't lock the UI for the official branch
++    private static int initializedItems = 0; // we use this as a primary check to ensure it's ready, without polling all the AtomicBooleans every cycle
++
++    public static void preloadData() {// Makes Loading Saves up to 400% faster (or in other terms, take 76~% less time)
++        if (MULTITHREADED_PRELOADING) {
++            HelperThread1 = new PreInitializationThread("PRE-INIT-1");
++            HelperThread1.start();
++            HelperThread2 = new PreInitializationThread("PRE-INIT-2");
++            HelperThread2.start();
++            HelperThread3 = new PreInitializationThread("PRE-INIT-3");
++            HelperThread3.start();
++            HelperThread4 = new PreInitializationThread("PRE-INIT-4");
++            HelperThread4.start();
++        }
++    }
++
++    @Override
++    public void run() {
++        if (this == HelperThread1)
++            initCore();
++        if (this == HelperThread2)
++            initHead();
++        if (this == HelperThread3)
++            initBody();
++        if (this == HelperThread4)
++            initFinal();
++
++        if (this.finished()) {
++            if (UtilText.engine == null) {// This actually saves 1.1 seconds from NPC initialization
++                UtilText.initScriptEngine();
++            }
++            if (!hasRedrawnMainScene) { // Since I block hitting New Game, Resume, Load whilst stuff isn't loaded, we redraw the scene to unblock them
++                hasRedrawnMainScene = true;
++                @SuppressWarnings("unused") long waited = 0; // persists so that IntelliJ doesn't make me remove the wait loop
++                while (Main.instance == null) {
++                    waited++;// this serves to ensure it doesn't reset the display of the main window before the window exists.
++                }
++                Platform.runLater(() -> Main.instance.resetContent()); // ensures it happens on the main thread
++//                System.out.println("Waited " + waited + " cycles for instance to initialize."); // Sanity check
++            }
++            Main.saveProperties();
++        }
++    }
++
++    private void initCore() {// 410-520ms
++        long timeStarted = System.currentTimeMillis(), timeSegment = System.currentTimeMillis();
++        do
++        {// Do->while is slightly more efficient in this situation than while {}, since it does then compares, instead of compare then do, meaning the work starts first
++            int cnt = BodyCoveringType.allBodyCoveringTypes.size();
++            if (cnt >= 365) {
++                INIT_BODY_COVERING_TYPE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_BODY_COVERING_TYPE initialized : " + cnt);
++            }
++        } while (!INIT_BODY_COVERING_TYPE.get());// 0-1ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Body Covering in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = Race.getAllRaces().size();
++            if (cnt >= 40) {
++                INIT_RACES.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_RACES initialized : " + cnt);
++            }
++        } while (!INIT_RACES.get());// 0-1ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Races in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = FluidType.getAllFluidTypes().size();
++            if (cnt >= 112) {
++                INIT_FLUID.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_FLUID initialized : " + cnt);
++            }
++        } while (!INIT_FLUID.get());// 400-510ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Fluids in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = WorldType.getAllWorldTypes().size();
++            if (cnt >= 65) {
++                INIT_WORLD.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_WORLD initialized : " + cnt);
++            }
++        } while (!INIT_WORLD.get());// 0-1ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Worlds in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = PlaceType.getAllPlaceTypes().size();
++            if (cnt >= 628) {
++                INIT_PLACE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_PLACE initialized : " + cnt);
++            }
++        } while (!INIT_PLACE.get());// 0-1ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Place in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            System.out.println("Finished Core in: " + (System.currentTimeMillis() - timeStarted) + " ms");
++        }
++    }
++
++    private void initHead() {// 1600-2400ms
++        long timeStarted = System.currentTimeMillis(), timeSegment = System.currentTimeMillis();
++        do {
++            if (!INIT_RACES.get()) continue;
++            int cnt = EarType.getAllEarTypes().size();
++            if (cnt >= 46) {
++                INIT_EAR.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_EAR initialized : " + cnt);
++            }
++        } while (!INIT_EAR.get());// 390-430ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Ears in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = EyeType.getAllEyeTypes().size();
++            if (cnt >= 39) {
++                INIT_EYE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_EYE initialized : " + cnt);
++            }
++        } while (!INIT_EYE.get());// 380-420ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Eyes in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = FaceType.getAllFaceTypes().size();
++            if (cnt >= 41) {
++                INIT_FACE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_FACE initialized : " + cnt);
++            }
++        } while (!INIT_FACE.get());// 980-1230ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Faces in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = HairType.getAllHairTypes().size();
++            if (cnt >= 40) {
++                INIT_HAIR.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_HAIR initialized : " + cnt);
++            }
++        } while (!INIT_HAIR.get());// 360-390ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Hair in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = HornType.getAllHornTypes().size();
++            if (cnt >= 13) {
++                INIT_HORN.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_HORN initialized : " + cnt);
++            }
++        } while (!INIT_HORN.get());// 290-310ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Horns in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = TongueType.getAllTongueTypes().size();
++            if (cnt >= 38) {
++                INIT_TONGUE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_TONGUE initialized : " + cnt);
++            }
++        } while (!INIT_TONGUE.get());// 0-1ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Tongues in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = MouthType.getAllMouthTypes().size();
++            if (cnt >= 38) {
++                INIT_MOUTH.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_MOUTH initialized : " + cnt);
++            }
++        } while (!INIT_MOUTH.get());// 0-1ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Mouths in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = AntennaType.getAllAntennaTypes().size();
++            if (cnt >= 1) {
++                INIT_ANTENNA.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_ANTENNA initialized : " + cnt);
++            }
++        } while (!INIT_ANTENNA.get());// 270-310ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Antennae in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            System.out.println("Finished Head in: " + (System.currentTimeMillis() - timeStarted) + " ms");
++        }
++    }
++
++    private void initBody() {// 2300-2500ms
++        long timeStarted = System.currentTimeMillis(), timeSegment = System.currentTimeMillis();
++        do {
++            if (!INIT_RACES.get()) continue;
++            int cnt = TorsoType.getAllTorsoTypes().size();
++            if (cnt >= 40) {
++                INIT_TORSO.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_TORSO initialized : " + cnt);
++            }
++        } while (!INIT_TORSO.get());// 390-430ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Torso in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = TailType.getAllTailTypes().size();
++            if (cnt >= 50) {
++                INIT_TAIL.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_TAIL initialized : " + cnt);
++            }
++        } while (!INIT_TAIL.get());// 390-440ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Tail in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = TentacleType.getAllTentacleTypes().size();
++            if (cnt >= 4) {
++                INIT_TENTACLE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_TENTACLE initialized : " + cnt);
++            }
++        } while (!INIT_TENTACLE.get());// 360-400ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Tentacle in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = ArmType.getAllArmTypes().size();
++            if (cnt >= 41) {
++                INIT_ARM.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_ARM initialized : " + cnt);
++            }
++        } while (!INIT_ARM.get());// 380-420ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Arm in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++
++        do {
++            int cnt = LegType.getAllLegTypes().size();
++            if (cnt >= 46) {
++                INIT_LEG.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_LEG initialized : " + cnt);
++            }
++        } while (!INIT_LEG.get());// 390-430ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Leg in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = FootType.getAllFootTypes().size();
++            if (cnt >= 9) {
++                INIT_FOOT.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_FOOT initialized : " + cnt);
++            }
++        } while (!INIT_FOOT.get());// 0-1ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Foot in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = WingType.getAllWingTypes().size();
++            if (cnt >= 11) {
++                INIT_WING.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_WING initialized : " + cnt);
++            }
++        } while (!INIT_WING.get());// 350-380ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Wing in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            System.out.println("Finished Body in: " + (System.currentTimeMillis() - timeStarted) + " ms");
++        }
++    }
++
++    private void initFinal() {// 2900-3200ms
++        long timeStarted = System.currentTimeMillis(), timeSegment = System.currentTimeMillis();
++        do {
++            int cnt = VaginaType.getAllVaginaTypes().size();
++            if (cnt >= 39) {
++                INIT_VAGINA.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_VAGINA initialized : " + cnt);
++            }
++        } while (!INIT_VAGINA.get());// 800-920ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Vagina in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = NippleType.getAllNippleTypes().size();
++            if (cnt >= 37) {
++                INIT_NIPPLE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_NIPPLE initialized : " + cnt);
++            }
++        } while (!INIT_NIPPLE.get());// 370-395ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Nipple in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = BreastType.getAllBreastTypes().size();
++            if (cnt >= 38) {
++                INIT_BREASTS.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_BREASTS initialized : " + cnt);
++            }
++        } while (!INIT_BREASTS.get());// 390-415ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Breasts in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = AnusType.getAllAnusTypes().size();
++            if (cnt >= 37) {
++                INIT_ANUS.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_ANUS initialized : " + cnt);
++            }
++        } while (!INIT_ANUS.get());// 390-410ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Anus in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = AssType.getAllAssTypes().size();
++            if (cnt >= 36) {
++                INIT_ASS.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_ASS initialized : " + cnt);
++            }
++        } while (!INIT_ASS.get());// 360-390ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Ass in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = TesticleType.getAllTesticleTypes().size();
++            if (cnt >= 39) {
++                INIT_TESTICLE.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_TESTICLE initialized : " + cnt);
++            }
++        } while (!INIT_TESTICLE.get());// 290-320ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Testicle in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        do {
++            int cnt = PenisType.getAllPenisTypes().size();
++            if (cnt >= 39) {
++                INIT_PENIS.set(true);
++                if (DEBUG_PRE_INIT && PRINT_COUNT) System.out.println("INIT_PENIS initialized : " + cnt);
++            }
++        } while (!INIT_PENIS.get());// 280-300ms
++        initializedItems++;
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Penis in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            timeSegment = System.currentTimeMillis();
++        }
++
++        Perk.generateSubspeciesPerks();// 0-2ms
++
++        if (DEBUG_PRE_INIT) {
++            System.out.println("Finished Perks in: " + (System.currentTimeMillis() - timeSegment) + " ms");
++            System.out.println("Finished Final in: " + (System.currentTimeMillis() - timeStarted) + " ms");
++        }
++    }
++
++    public PreInitializationThread(String name) {
++        super(name);
++    }
++
++    public boolean finished() {
++        if (initializedItems < 27) return false;
++        return INIT_BREASTS.get() && INIT_PLACE.get() && INIT_WORLD.get() && INIT_ANTENNA.get() && INIT_ANUS.get() && INIT_ARM.get() && INIT_ASS.get() && INIT_EAR.get() && INIT_EYE.get() && INIT_FACE.get() && INIT_FLUID.get() && INIT_FOOT.get() && INIT_HAIR.get() && INIT_HORN.get() && INIT_LEG.get() && INIT_MOUTH.get() && INIT_NIPPLE.get() && INIT_PENIS.get() && INIT_TAIL.get() && INIT_TENTACLE.get() && INIT_TESTICLE.get() && INIT_TONGUE.get() && INIT_TORSO.get() && INIT_VAGINA.get() && INIT_WING.get();
++    }
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/utils/colours/Colour.java liliths-throne-public/src/com/lilithsthrone/utils/colours/Colour.java
+--- liliths-throne-base/src/com/lilithsthrone/utils/colours/Colour.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/utils/colours/Colour.java	2025-03-13 21:02:55.015106128 -0400
+@@ -6,6 +6,7 @@
+ import java.util.Collections;
+ import java.util.List;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -98,7 +99,7 @@
+ 	public Colour(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -393,4 +394,4 @@
+ 			}
+ 		};
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/utils/Util.java liliths-throne-public/src/com/lilithsthrone/utils/Util.java
+--- liliths-throne-base/src/com/lilithsthrone/utils/Util.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/utils/Util.java	2025-03-13 21:02:55.015106128 -0400
+@@ -28,6 +28,7 @@
+ import java.util.regex.Pattern;
+ import java.util.stream.Collectors;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -292,7 +293,7 @@
+ 	
+ 	public static String getXmlRootElementName(File XMLFile) {
+ 		try {
+-			Document doc = Main.getDocBuilder().parse(XMLFile);
++			Document doc = DocBuilders.parseDoc(XMLFile);
+ 
+ 			// Cast magic:
+ 			doc.getDocumentElement().normalize();
+@@ -2060,4 +2061,4 @@
+ 			.filter(x -> x != null)
+ 			.collect(Collectors.toList());
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/world/AbstractWorldType.java liliths-throne-public/src/com/lilithsthrone/world/AbstractWorldType.java
+--- liliths-throne-base/src/com/lilithsthrone/world/AbstractWorldType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/world/AbstractWorldType.java	2025-03-13 21:02:55.016106125 -0400
+@@ -5,6 +5,7 @@
+ import java.util.HashMap;
+ import java.util.Map;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -104,7 +105,7 @@
+ 	public AbstractWorldType(File XMLFile, String author, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -356,4 +357,4 @@
+ 	public boolean isMajorArea() {
+ 		return getMajorAreaIndex()>0 && getMajorAreaIndex()!=Integer.MAX_VALUE;
+ 	}
+-}
++}
+\ No newline at end of file
+diff -urN liliths-throne-base/src/com/lilithsthrone/world/places/AbstractPlaceType.java liliths-throne-public/src/com/lilithsthrone/world/places/AbstractPlaceType.java
+--- liliths-throne-base/src/com/lilithsthrone/world/places/AbstractPlaceType.java	2024-12-08 18:24:22.000000000 -0500
++++ liliths-throne-public/src/com/lilithsthrone/world/places/AbstractPlaceType.java	2025-03-13 21:02:55.017106123 -0400
+@@ -12,6 +12,7 @@
+ import java.util.Map;
+ import java.util.Set;
+ 
++import com.lilithsthrone.threading.DocBuilders;
+ import org.w3c.dom.Document;
+ 
+ import com.lilithsthrone.controller.xmlParsing.Element;
+@@ -175,7 +176,7 @@
+ 	public AbstractPlaceType(File XMLFile, String author, String id, boolean mod) {
+ 		if (XMLFile.exists()) {
+ 			try {
+-				Document doc = Main.getDocBuilder().parse(XMLFile);
++				Document doc = DocBuilders.parseDoc(XMLFile);
+ 				
+ 				// Cast magic:
+ 				doc.getDocumentElement().normalize();
+@@ -836,4 +837,4 @@
+ 	public String getWallName() {
+ 		return wallName;
+ 	}
+-}
++}
+\ No newline at end of file

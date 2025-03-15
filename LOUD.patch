@@ -1,0 +1,117 @@
+Subject: [PATCH] LOUD
+---
+Index: src/com/lilithsthrone/game/character/GameCharacter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/lilithsthrone/game/character/GameCharacter.java b/src/com/lilithsthrone/game/character/GameCharacter.java
+--- a/src/com/lilithsthrone/game/character/GameCharacter.java	(revision bf4b91acfcede88e00836bdd0297a6a6a94e53b2)
++++ b/src/com/lilithsthrone/game/character/GameCharacter.java	(date 1740100032688)
+@@ -4831,6 +4831,9 @@
+ 					sb.append(pt.getRemovalDescription(this));
+ 				}
+ 			}
++            if((trait==PersonalityTrait.CONFIDENT || trait==PersonalityTrait.BRAVE) && Math.random()<0.5f){
++                this.addPersonalityTrait(PersonalityTrait.LOUD);
++            }
+ 		}
+ 		if(personalityTraits.add(trait) && Main.game.isStarted() && this.getBody()!=null) {
+ 			sb.append(trait.getAdditionDescription(this));
+Index: src/com/lilithsthrone/game/character/persona/PersonalityTrait.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/lilithsthrone/game/character/persona/PersonalityTrait.java b/src/com/lilithsthrone/game/character/persona/PersonalityTrait.java
+--- a/src/com/lilithsthrone/game/character/persona/PersonalityTrait.java	(revision bf4b91acfcede88e00836bdd0297a6a6a94e53b2)
++++ b/src/com/lilithsthrone/game/character/persona/PersonalityTrait.java	(date 1740087271225)
+@@ -407,24 +407,55 @@
+ 		public List<PersonalityTrait> getMutuallyExclusiveSettings() {
+ 			return Util.newArrayListOfValues(MUTE, LISP);
+ 		}
++
+ 		@Override
+ 		public String getAdditionDescription(GameCharacter target) {
+ 			return UtilText.parse(target,
+ 					"<p style='text-align:center;'>"
+ 							+ (target.hasPersonalityTrait(SLOVENLY)
+-								?"[style.colourDisabled([npc.Name] already speaks in a slovenly manner, so nothing happens...)]"
+-								:"[npc.Name] [npc.verb(find)] [npc.herself] [style.colourMinorBad(speaking in a slovenly manner)]!")
+-						+ "</p>");
++							? "[style.colourDisabled([npc.Name] already speaks in a slovenly manner, so nothing happens...)]"
++							: "[npc.Name] [npc.verb(find)] [npc.herself] [style.colourMinorBad(speaking in a slovenly manner)]!")
++							+ "</p>");
+ 		}
++
+ 		@Override
+ 		public String getRemovalDescription(GameCharacter target) {
+ 			return UtilText.parse(target,
+ 					"<p style='text-align:center;'>"
+ 							+ (!target.hasPersonalityTrait(SLOVENLY)
+-								?"[style.colourDisabled([npc.Name] already [npc.do]n't speak in a slovenly manner, so nothing happens...)]"
+-								:"[npc.Name] [npc.verb(find)] [npc.herself] [style.colourMinorGood(no longer speaking in a slovenly manner)]!")
+-						+ "</p>");
++							? "[style.colourDisabled([npc.Name] already [npc.do]n't speak in a slovenly manner, so nothing happens...)]"
++							: "[npc.Name] [npc.verb(find)] [npc.herself] [style.colourMinorGood(no longer speaking in a slovenly manner)]!")
++							+ "</p>");
+ 		}
++	},
++	LOUD(false,
++				 PersonalityCategory.SPEECH,
++			"loud",
++						 "[npc.Name] [npc.verb(speak)] loudly.",
++						 "[style.italicsBad(All of [npc.namePos] in-game speech will be affected by this!)]", PresetColour.BASE_BROWN) {
++			@Override
++			public List<PersonalityTrait> getMutuallyExclusiveSettings() {
++				return Util.newArrayListOfValues(MUTE);
++			}
++			@Override
++			public String getAdditionDescription(GameCharacter target) {
++				return UtilText.parse(target,
++						"<p style='text-align:center;'>"
++								+ (target.hasPersonalityTrait(LOUD)
++								?"[style.colourDisabled([npc.Name] already speaks in a loud manner, so nothing happens...)]"
++								:"[npc.Name] [npc.verb(find)] [npc.herself] [style.colourMinorBad(speaking very loudly)]!")
++								+ "</p>");
++			}
++			@Override
++			public String getRemovalDescription(GameCharacter target) {
++				return UtilText.parse(target,
++						"<p style='text-align:center;'>"
++								+ (!target.hasPersonalityTrait(LOUD)
++								?"[style.colourDisabled([npc.Name] already [npc.do]n't speak loudly, so nothing happens...)]"
++								:"[npc.Name] [npc.verb(find)] [npc.herself] [style.colourMinorGood(no longer speaking loudly]!")
++								+ "</p>");
++			}
++
+ 	},;
+ 	
+ 	private boolean specialRequirements;
+Index: src/com/lilithsthrone/game/dialogue/utils/UtilText.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/lilithsthrone/game/dialogue/utils/UtilText.java b/src/com/lilithsthrone/game/dialogue/utils/UtilText.java
+--- a/src/com/lilithsthrone/game/dialogue/utils/UtilText.java	(revision bf4b91acfcede88e00836bdd0297a6a6a94e53b2)
++++ b/src/com/lilithsthrone/game/dialogue/utils/UtilText.java	(date 1740102791460)
+@@ -545,6 +545,9 @@
+ 				if(target.hasPersonalityTrait(PersonalityTrait.STUTTER)) {
+ 					modifiedSentence = Util.addStutter(modifiedSentence, 4);
+ 				}
++				if(target.hasPersonalityTrait(PersonalityTrait.LOUD)) {
++					modifiedSentence=modifiedSentence.toUpperCase();
++				}
+ 			}
+ 			
+ 			if(splitOnConditional.length>1) {
+@@ -9869,7 +9872,7 @@
+ 		engine.put("itemGen", Main.game.getItemGen());
+ 		engine.put("flags", Main.game.getDialogueFlags());
+ 		engine.put("dialogueManager", Main.game.getDialogueManager());
+-		
++
+ 		// Java classes:
+ 		for(Month month : Month.values()) {
+ 			engine.put("MONTH_"+month, month);
