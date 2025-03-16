@@ -1,0 +1,19 @@
+Subject: [PATCH] ExpPreg-NoPerksForStacking
+---
+Index: src/com/lilithsthrone/game/character/GameCharacter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/lilithsthrone/game/character/GameCharacter.java b/src/com/lilithsthrone/game/character/GameCharacter.java
+--- a/src/com/lilithsthrone/game/character/GameCharacter.java	(revision fb3da2bc92ddcd6c2a045831e06618038bd545db)
++++ b/src/com/lilithsthrone/game/character/GameCharacter.java	(date 1742067101381)
+@@ -21237,7 +21237,7 @@
+ 				}
+ 				
+ 			// Pregnancy stacking modification here -- Ysette
+-			if(Main.game.isInSex() && (this.hasTraitActivated(Perk.FETISH_BROODMOTHER) || (partner != null && partner.hasTraitActivated(Perk.FETISH_SEEDER)))) {
++			if(Main.game.isInSex()) {
+ 				if(this.isPregnant()) {
+ 					boolean checkNewLitter = true;
+ 					for (Litter litter : this.getPregnantLitters()) {

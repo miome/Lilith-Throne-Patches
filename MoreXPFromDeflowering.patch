@@ -1,0 +1,24 @@
+Subject: [PATCH] Increase experience gain from "taking virginities"
+---
+Index: src/com/lilithsthrone/game/character/fetishes/AbstractFetish.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/com/lilithsthrone/game/character/fetishes/AbstractFetish.java b/src/com/lilithsthrone/game/character/fetishes/AbstractFetish.java
+--- a/src/com/lilithsthrone/game/character/fetishes/AbstractFetish.java	(revision 7636de05da5eacdb466ce3fa5dfeec398095b131)
++++ b/src/com/lilithsthrone/game/character/fetishes/AbstractFetish.java	(revision d7687b1bad4fd071038bd85c836fc1e596a3ffb5)
+@@ -269,11 +269,11 @@
+ 	}
+ 	
+ 	public static int getExperienceGainFromTakingVaginalVirginity(GameCharacter owner) {
+-		return owner.getLevel()*2;
++		return owner.getLevel()*8;
+ 	}
+ 	
+ 	public static int getExperienceGainFromTakingOtherVirginity(GameCharacter owner) {
+-		return owner.getLevel();
++		return owner.getLevel()*2;
+ 	}
+ 	
+ 	public FetishPreference getFetishPreferenceDefault() {
